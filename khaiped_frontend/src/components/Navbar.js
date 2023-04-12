@@ -7,7 +7,7 @@ import Searchbar from "./Searchbar";
 function Navbar() {
   return (
     <div>
-      <nav className="h-16 bg-primary px-3 flex justify-between items-center">
+      <nav className="h-[70px] bg-primary px-3 flex justify-between items-center">
         <button className="">
           <img src={logo} alt="Khaiped Logo" />
         </button>
