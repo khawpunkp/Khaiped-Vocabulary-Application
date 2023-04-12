@@ -7,9 +7,11 @@ import HomeButtonContainer from './components/HomeButtonContainer'
 
 function App() {
   return (
-    <div className="bg-priamry">  
-      <Navbar/>   
-      <HomeButtonContainer/>
+    <div className="flex flex-col">
+      <Navbar />
+      <div className="flex-1 flex justify-center items-center">
+        <HomeButtonContainer />
+      </div>
     </div>
   );
 }

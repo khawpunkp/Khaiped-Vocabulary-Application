@@ -1,19 +1,18 @@
 import React from "react";
 
-    function HomeButton(props) {
-        return (
-            <div>
-                <div className="ButtonImg">
-                    <img src={props.buttonImg} alt="Button"/>
-                </div>
-                <div className="Title">
-                    {props.title}
-                </div>
-                <div className="Description">
-                    {props.description}
-                </div>
+function HomeButton(props) {
+    return (
+        <button
+            className="w-[420px] h-[100px] bg-cover bg-center p-4 pl-36 flex items-center"
+            style={{
+                backgroundImage: `url(${props.buttonImg})`
+            }}        >
+            <div className="absolute text-left">
+                <h2 className="text-3xl font-black">{props.title}</h2>
+                <p className="text-sm">{props.description}</p>
             </div>
-        )
-    }
+        </button>
+    );
+}
 
 export default HomeButton;
