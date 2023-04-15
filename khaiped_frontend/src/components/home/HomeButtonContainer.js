@@ -1,9 +1,9 @@
 import React from "react";
-import randomButton from "../assets/svg/ButtonRandomEmpty.svg";
-import cardButton from "../assets/svg/ButtonCardEmpty.svg";
-import gameButton from "../assets/svg/ButtonGameEmpty.svg";
-import quizButton from "../assets/svg/ButtonQuizEmpty.svg";
-import bookButton from "../assets/svg/ButtonBookEmpty.svg";
+import randomButton from "../../assets/svg/home/ButtonRandomEmpty.svg";
+import cardButton from "../../assets/svg/home/ButtonCardEmpty.svg";
+import gameButton from "../../assets/svg/home/ButtonGameEmpty.svg";
+import quizButton from "../../assets/svg/home/ButtonQuizEmpty.svg";
+import bookButton from "../../assets/svg/home/ButtonBookEmpty.svg";
 import HomeButton from './HomeButton'
 
 function HomeButtonContainer(){
