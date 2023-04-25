@@ -1,17 +1,33 @@
 import React from 'react';
 import './App.css';
 import './index.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar';
-import HomeButtonContainer from './components/HomeButtonContainer'
+
+
+import Home from './pages/Home.js'
+import Random from './pages/Random'
+
+
+import HomeButtonContainer from './components/home/HomeButtonContainer'
+import MainWordContainer from './components/word/MainWordContainer';
 
 
 function App() {
   return (
-    <div className="flex flex-col">
-      <Navbar />
-      <div className="flex-1 flex justify-center items-center">
-        <HomeButtonContainer />
+    <div className="">
+      <div className="fixed top-0 left-0 w-full">
+        <Navbar />
       </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+
+      {/* <div className="content flex">
+            <HomeButtonContainer />
+        </div> */}
     </div>
   );
 }
