@@ -18,7 +18,7 @@ function App() {
     <div className="">
       <div className="fixed top-0 left-0 w-full">
         <Navbar />
-      </div> \
+      </div>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
