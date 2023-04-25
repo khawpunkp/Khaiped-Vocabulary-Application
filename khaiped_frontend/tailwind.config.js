@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         'primary': '#892F8B', // define the primary color
         'secondary': '#F4E9FF', // define the secondary color
+        'wordContainer': '#D9D9D9',
       },
     },
   },

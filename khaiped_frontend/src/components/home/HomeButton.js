@@ -7,7 +7,7 @@ function HomeButton(props) {
             style={{
                 backgroundImage: `url(${props.buttonImg})`
             }}        >
-            <div className="absolute text-left">
+            <div className="text-left">
                 <h2 className="text-3xl font-black">{props.title}</h2>
                 <p className="text-sm">{props.description}</p>
             </div>
