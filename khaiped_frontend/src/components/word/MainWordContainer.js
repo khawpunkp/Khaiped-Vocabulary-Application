@@ -3,7 +3,10 @@ import closeButton from "../../assets/svg/mainWordContainer/Close.svg"
 import refreshButton from "../../assets/svg/mainWordContainer/Refresh.svg"
 import soundButton from "../../assets/svg/mainWordContainer/Sound.svg"
 
-function MainWordContainer() {
+function MainWordContainer(props) {
+    const handleClose = () => {
+        props.onClose(false);
+    };
     return (
         <div className="relative w-[580px] h-[580px] bg-wordContainer rounded-[40px] border-4 border-black flex flex-col items-center">
             <h1 className="h-[100px] px-[55px] text-[64px] font-bold absolute top-[25%]">Authentication</h1>
@@ -14,6 +17,7 @@ function MainWordContainer() {
                 style={{
                     backgroundImage: `url(${closeButton})`
                 }}
+                onClick={() => handleClose()}
             ></button>
             <button className="sound h-[37px] w-[37px] absolute bottom-[20px] left-[20px] bg-cover bg-center"
                 style={{
