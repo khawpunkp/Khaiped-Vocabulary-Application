@@ -1,5 +1,5 @@
 import React from "react";
-import magnify from "../assets/svg/Magnify.svg";
+import magnify from "../../assets/svg/navbar/Magnify.svg";
 
 function Searchbar() {
   return (

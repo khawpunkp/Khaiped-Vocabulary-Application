@@ -31,3 +31,13 @@ input::placeholder {
     justify-content: center;
     align-items: center;
 }
+
+.loginInput {
+    background-color: white;
+    padding: 0.25rem 1rem;
+    width: 400px;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
