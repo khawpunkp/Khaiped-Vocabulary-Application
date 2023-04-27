@@ -9,7 +9,7 @@ import { useState, useRef, useEffect } from "react";
 
 function Navbar() {
   const [isShown, setIsShown] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const refUserButton = useRef();
 
   useEffect(() => {
