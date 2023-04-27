@@ -1,15 +1,15 @@
 import React from "react";
-import user_icon from "../assets/svg/User.svg";
-import logo from "../assets/svg/Logo.svg";
+import user_icon from "../../assets/svg/navbar/User.svg";
+import logo from "../../assets/svg/navbar/Logo.svg";
 // import magnify from "../assets/svg/Magnify.svg";
 import Searchbar from "./Searchbar";
-import UserButton from "./user/UserButton";
-import GuestButton from "./user/GuestButton";
+import UserButton from "../login/UserButton";
+import GuestButton from "../login/GuestButton";
 import { useState, useRef, useEffect } from "react";
 
 function Navbar() {
   const [isShown, setIsShown] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const refUserButton = useRef();
 
   useEffect(() => {
