@@ -7,11 +7,11 @@ import Navbar from './components/navbar/Navbar';
 
 import Home from './pages/Home.js'
 import Random from './pages/Random'
-
+import Login from './pages/Login';
 
 import HomeButtonContainer from './components/home/HomeButtonContainer'
 import MainWordContainer from './components/word/MainWordContainer';
-import Login from './pages/Login';
+
 
 
 function App() {
@@ -22,7 +22,8 @@ function App() {
       </div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Login />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </BrowserRouter>
 

@@ -3,7 +3,7 @@ import HomeButtonContainer from '../components/home/HomeButtonContainer'
 
 function Home() {
     return (
-        <div className="content flex">
+        <div className="content flex justify-center">
             <HomeButtonContainer />
         </div>
     )
