@@ -11,7 +11,7 @@ function HomeButtonContainer() {
     const [rndWordPopUp, setRndWordPopUp] = useState(false)
     return (
         <div className="relative">
-            <div className="flex flex-col my-8 space-y-4">
+            <div className="flex flex-col my-8 space-y-6">
                 <div className="RandomButton" onClick={() => setRndWordPopUp(true)}>
                     <HomeButton buttonImg={randomButton} title="Random Word" description="New word you have never learn" />
                 </div>
