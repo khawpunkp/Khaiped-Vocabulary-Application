@@ -6,11 +6,13 @@ import Searchbar from "./Searchbar";
 import UserButton from "../login/UserButton";
 import GuestButton from "../login/GuestButton";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isShown, setIsShown] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const refUserButton = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let handleClickOutside = (event) => {
@@ -28,7 +30,7 @@ function Navbar() {
   return (
     <div>
       <nav className="h-[70px] bg-primary px-3 flex justify-between items-center">
-        <button className="">
+        <button onClick={() => navigate("/")} className="">
           <img src={logo} alt="Khaiped Logo" />
         </button>
         <div className="flex space-x-4 items-center">
@@ -39,12 +41,11 @@ function Navbar() {
             <button onClick={() => setIsShown(!isShown)}  className="user rounded-full p-1 bg-white">
               <img src={user_icon} alt="User Icon" className="transform scale-[0.85]" />
             </button>
-            {isShown && isLogin && <div className='absolute right-3 top-[65px]'> <UserButton /> </div>}
-            {isShown && !isLogin && <div className='absolute right-3 top-[65px]'> <GuestButton /> </div>}
+            {isShown && isLogin && <div className='absolute right-3 top-[65px]'> <UserButton onClose={() => setIsShown(false)}/> </div>}
+            {isShown && !isLogin && <div className='absolute right-3 top-[65px]'> <GuestButton onClose={() => setIsShown(false)}/> </div>}
           </div>
         </div>
       </nav>
-
     </div>
   );
 }
