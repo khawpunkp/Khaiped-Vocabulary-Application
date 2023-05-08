@@ -4,31 +4,23 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/navbar/Navbar';
 
-
 import Home from './pages/Home.js'
-import Random from './pages/Random'
-
-
-import HomeButtonContainer from './components/home/HomeButtonContainer'
-import MainWordContainer from './components/word/MainWordContainer';
 import Login from './pages/Login';
-
+import Statistic from './pages/Statistic';
 
 function App() {
   return (
     <div className="">
-      <div className="fixed top-0 left-0 w-full">
-        <Navbar />
-      </div>
       <BrowserRouter>
+        <div className="fixed top-0 left-0 w-full">
+          <Navbar />
+        </div>
         <Routes>
-          <Route path='/' element={<Login />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/statistic' element={<Statistic />} />
         </Routes>
       </BrowserRouter>
-
-      {/* <div className="content flex">
-            <HomeButtonContainer />
-        </div> */}
     </div>
   );
 }

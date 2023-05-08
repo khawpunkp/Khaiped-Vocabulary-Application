@@ -13,20 +13,20 @@ function MainWordContainer(props) {
             <p className="h-[100px] px-[55px] font-bold absolute top-[40%]">(Noun)</p>
             <h2 className="thai text-2xl font-bold px-[55px] absolute top-[50%]">การรับรองความถูกต้อง</h2>
             <h2 className="text-2xl font-bold px-[55px] text-center absolute top-[65%]">the act of proving that something is real, true or what somebody claims it is</h2>
-            <button className="close h-[37px] w-[37px] absolute top-[20px] right-[20px] bg-cover bg-center"
+            {props.close && <button className="close h-[37px] w-[37px] absolute top-[20px] right-[20px] bg-cover bg-center"
                 style={{
                     backgroundImage: `url(${closeButton})`
                 }}
                 onClick={() => handleClose()}
-            ></button>
-            <button className="sound h-[37px] w-[37px] absolute bottom-[20px] left-[20px] bg-cover bg-center"
+            ></button>}
+            {props.sound && <button className="sound h-[37px] w-[37px] absolute bottom-[20px] left-[20px] bg-cover bg-center"
                 style={{
                     backgroundImage: `url(${soundButton})`
-                }}></button>
-            <button className="refresh h-[37px] w-[37px] absolute bottom-[20px] right-[20px] bg-cover bg-center"
+                }}></button>}
+            {props.refresh && <button className="refresh h-[37px] w-[37px] absolute bottom-[20px] right-[20px] bg-cover bg-center"
                 style={{
                     backgroundImage: `url(${refreshButton})`
-                }}></button>
+                }}></button>}
         </div>
     )
 }

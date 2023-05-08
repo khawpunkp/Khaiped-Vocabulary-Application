@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 function Login() {
+    const [isCorrect, setIsCorrect] = useState(true)
     return (
         <div className="">
             <div className="content flex flex-row justify-evenly ">
@@ -23,7 +24,7 @@ function Login() {
                                 />
                             </div>
                         </div>
-                        <p className="text-[20px] font-bold text-red-500">Your Username is already taken</p>
+                        {<p className={`text-[20px] font-bold ${isCorrect ? 'opacity-0' : 'text-red-500'}`}>Your Username is already taken</p>}
                         <button type="submit" className='loginButton'>{'Register'}</button>
                     </form>
                 </div>
@@ -47,7 +48,7 @@ function Login() {
                                 />
                             </div>
                         </div>
-                        <p className="text-[20px] font-bold text-red-500">Incorrect Username or Password</p>
+                        <p className={`text-[20px] font-bold ${isCorrect ? 'opacity-0' : 'text-red-500'}`}>Incorrect Username or Password</p>
                         <button type="submit" className='loginButton'>{'Log In'}</button>
                     </form>
                 </div>
