@@ -1,14 +1,14 @@
 import React from 'react'
-import LoginContainer from '../components/login/LoginContainer'
+import RegisterContainer from '../components/login/RegisterContainer'
 
-function Login() {
+function Register() {
     return (
         <div className="">
             <div className="content flex justify-center">
-                <LoginContainer/>            
+                <RegisterContainer/>            
             </div>
         </div>
     );
 }
 
-export default Login
+export default Register

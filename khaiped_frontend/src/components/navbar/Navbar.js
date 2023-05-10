@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isShown, setIsShown] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const refUserButton = useRef();
   const navigate = useNavigate();
 
