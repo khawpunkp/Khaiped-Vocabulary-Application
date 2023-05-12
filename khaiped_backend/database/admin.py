@@ -19,7 +19,14 @@ class CustomUserAdmin(UserAdmin):
     filter_horizontal = ()
     list_filter = ()
 
+class WordAdmin(UserAdmin):
+    filter_horizontal = ('synonyms',)
+    ordering = ('word', )
+    list_display = ('word', 'tran_th', 'tran_eng', 'part_of_speech', 'root_id',)
+    list_filter = ('part_of_speech',)
+    search_fields = ('word', 'tran_th', 'tran_eng')
+
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(Word)
+admin.site.register(Word, WordAdmin)
 admin.site.register(WordRoot)
 admin.site.register(WordLearned)

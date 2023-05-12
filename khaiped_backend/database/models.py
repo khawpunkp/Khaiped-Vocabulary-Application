@@ -49,7 +49,8 @@ class Word(models.Model):
     part_of_speech = models.CharField(choices=PARTS_OF_SPEECH, max_length=20, default='noun')
     root_id = models.ForeignKey(WordRoot, on_delete=models.SET_NULL, null=True)
     synonyms = models.ManyToManyField('self', blank=True)
-
+    part_of_speech = models.CharField(choices=PARTS_OF_SPEECH, max_length=20)
+    
     def __str__(self):
         return self.word
 
@@ -61,6 +62,7 @@ class User(AbstractBaseUser):
     quiz_score = models.IntegerField(default=0, null=False)
     quiz_taken = models.IntegerField(default=0, null=False)
     day_streak = models.IntegerField(default=0, null=False)
+    
 
     USERNAME_FIELD = 'username'
 

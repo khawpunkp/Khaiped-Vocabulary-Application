@@ -4,7 +4,7 @@ from database.models import User
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        field = ('username', 'password')
+        fields = ('username', 'password')
     def create(self, data):
         user_obj = User.objects.create_user(username = data['username'], password = data['password'])
         user_obj.save()
