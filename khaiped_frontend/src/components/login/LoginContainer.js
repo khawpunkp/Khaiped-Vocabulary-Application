@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function RegisterContainer() {
     const [isCorrect, setIsCorrect] = useState(true)
+    const [isSubmit, setIsSubmit] = useState(false)
     const navigate = useNavigate();
     return (
         <div className="LoginContainer flex flex-col items-center space-y-12">
@@ -24,10 +25,12 @@ function RegisterContainer() {
                         />
                     </div>
                 </div>
-                <p className={`text-[20px] font-bold ${isCorrect ? 'opacity-0' : 'text-red-500'}`}>Incorrect Username or Password</p>
+                {<p className={`text-[20px] font-bold ${isSubmit ? (isCorrect ? 'opacity-0' : 'text-red-500') : 'opacity-0'}`}>
+                    {isCorrect ? 'Registration Successfull' : 'Your Username is already taken'}
+                </p>}
                 <button type="submit" className='loginButton'>{'Log In'}</button>
                 <div className="flex flex-row items-center space-x-2">
-                <p className='font-medium '>Do not have account?</p>
+                <p className='font-bold '>Do not have account?</p>
                 <button onClick={() => navigate("/register")} className= 'font-bold text-primary'>{'Register'}</button>                
                 </div>
                 
