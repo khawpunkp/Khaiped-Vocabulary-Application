@@ -6,6 +6,7 @@ import Navbar from './components/navbar/Navbar';
 
 import Home from './pages/Home.js'
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Statistic from './pages/Statistic';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/statistic' element={<Statistic />} />
         </Routes>
       </BrowserRouter>
