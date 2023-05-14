@@ -1,6 +1,7 @@
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+
 function RegisterContainer() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -10,10 +11,11 @@ function RegisterContainer() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('http://127.0.0.1:8000/user/register', {
-            username: username,
-            password: password
-        })
+        axios
+            .post('http://127.0.0.1:8000/user/register', {
+                username: username,
+                password: password
+            })
             .then(response => {
                 setIsCorrect(true);
                 setIsSubmit(true);
@@ -55,8 +57,8 @@ function RegisterContainer() {
                 </p>}
                 <button type="submit" className='loginButton'>{'Register'}</button>
                 <div className="flex flex-row items-center space-x-2">
-                <p className='font-bold '>Already have account?</p>
-                <button onClick={() => navigate("/login")} className= 'font-bold text-primary'>{'Log In'}</button>                
+                    <p className='font-bold '>Already have account?</p>
+                    <button onClick={() => navigate("/login")} className='font-bold text-primary'>{'Log In'}</button>
                 </div>
             </form>
         </div>
