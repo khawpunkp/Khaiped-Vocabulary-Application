@@ -16,10 +16,14 @@ class UserLogInSerializer(serializers.ModelSerializer):
     password = serializers.CharField()
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ('username', 'password')
     def check_user(self, data):
         user = authenticate(username = data['username'], password = data['password'])
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Unable to log in.")
-    
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username',)

@@ -9,7 +9,7 @@ function LogInContainer() {
     const [isSubmit, setIsSubmit] = useState(false)
     const navigate = useNavigate();
 
-    const handleLogin = (event) => {
+    const submitLogin = (event) => {
         event.preventDefault();
         axios
             .post("http://127.0.0.1:8000/user/login", {
@@ -19,14 +19,17 @@ function LogInContainer() {
             .then((response) => {
                 setIsCorrect(true);
                 setIsSubmit(true);
-                console.log('success');
+                console.log(response);
+                setTimeout(() => {
+                    navigate('/'); // Replace '/' with the desired path
+                }, 1000);
             })
             .catch((error) => {
                 setIsCorrect(false);
                 setIsSubmit(true);
+                console.log(error);
             });
     }
-
 
     return (
         <div className="LoginContainer flex flex-col items-center space-y-12">
@@ -55,7 +58,7 @@ function LogInContainer() {
                 {<p className={`text-[20px] font-bold ${isSubmit ? (isCorrect ? 'text-green-500' : 'text-red-500') : 'opacity-0'}`}>
                     {isCorrect ? 'Login Successfull' : 'Incorrect Username or Password'}
                 </p>}
-                <button onClick={handleLogin} className='loginButton'>{'Log In'}</button>
+                <button onClick={submitLogin} className='loginButton'>{'Log In'}</button>
                 <div className="flex flex-row items-center space-x-2">
                     <p className='font-bold '>Do not have account?</p>
                     <button onClick={() => navigate("/register")} className='font-bold text-primary'>{'Register'}</button>

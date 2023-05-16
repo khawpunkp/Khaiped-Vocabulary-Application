@@ -9,6 +9,12 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Statistic from './pages/Statistic';
 
+import axios from 'axios'
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
 function App() {
   return (
     <div className="">

@@ -9,7 +9,7 @@ function RegisterContainer() {
     const [isSubmit, setIsSubmit] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const submitRegister = (event) => {
         event.preventDefault();
         axios
             .post('http://127.0.0.1:8000/user/register', {
@@ -20,6 +20,9 @@ function RegisterContainer() {
                 setIsCorrect(true);
                 setIsSubmit(true);
                 console.log('success');
+                setTimeout(() => {
+                    navigate('/'); // Replace '/' with the desired path
+                }, 1000);
             })
             .catch(error => {
                 setIsCorrect(false);
@@ -30,11 +33,11 @@ function RegisterContainer() {
     return (
         <div className="RegisterContainer flex flex-col items-center space-y-12">
             <h1 className='font-black text-[80px]'>{'Register'}</h1>
-            <form className="form flex flex-col items-center space-y-7" onSubmit={handleSubmit}>
+            <form className="form flex flex-col items-center space-y-7" onSubmit={submitRegister}>
                 <div className="flex flex-col space-y-10">
                     <div className='loginInput'>
                         <input type="username"
-                            id="registUsername"
+                            id="username"
                             placeholder="Username"
                             className="w-full bg-transparent pt-2 pb-1 outline-none text-lg placeholder-[#590070] placeholder-opacity-[0.28]"
                             value={username}
@@ -44,7 +47,7 @@ function RegisterContainer() {
                     </div>
                     <div className="loginInput">
                         <input type="password"
-                            id="registPassword"
+                            id="password"
                             placeholder="Password"
                             className="w-full bg-transparent pt-2 pb-1 outline-none text-lg placeholder-[#590070] placeholder-opacity-[0.28]"
                             value={password}
