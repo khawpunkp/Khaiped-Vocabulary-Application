@@ -21,7 +21,7 @@ function LogInContainer() {
                 setIsSubmit(true);
                 console.log(response);
                 setTimeout(() => {
-                    navigate('/'); // Replace '/' with the desired path
+                    navigate('/'); 
                 }, 1000);
             })
             .catch((error) => {

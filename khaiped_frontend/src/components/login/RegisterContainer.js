@@ -21,8 +21,8 @@ function RegisterContainer() {
                 setIsSubmit(true);
                 console.log('success');
                 setTimeout(() => {
-                    navigate('/'); // Replace '/' with the desired path
-                }, 1000);
+                    navigate('/login'); 
+                }, 1000);                
             })
             .catch(error => {
                 setIsCorrect(false);

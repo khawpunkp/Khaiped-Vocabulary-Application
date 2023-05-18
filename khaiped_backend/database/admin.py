@@ -1,8 +1,8 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+from django.contrib import admin
 from .models import User, Word, WordRoot, WordLearned
 
-class CustomUserAdmin(UserAdmin):
+class CustomUserAdmin(admin.ModelAdmin):
     # model = User
     # list_display = ['username', 'is_admin']
     # filter_horizontal = []
@@ -19,7 +19,7 @@ class CustomUserAdmin(UserAdmin):
     filter_horizontal = ()
     list_filter = ()
 
-class WordAdmin(UserAdmin):
+class WordAdmin(admin.ModelAdmin):
     filter_horizontal = ('synonyms',)
     ordering = ('word', )
     list_display = ('word', 'tran_th', 'tran_eng', 'part_of_speech', 'root_id',)
