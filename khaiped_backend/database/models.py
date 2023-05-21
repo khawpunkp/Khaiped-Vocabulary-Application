@@ -97,8 +97,9 @@ class User(AbstractBaseUser):
     def get_day_streak(self):
         current_date = timezone.now().date()
         previous_date = current_date - timedelta(days=1)
-
-        if self.last_login.date() == previous_date:
+        if self.last_login.date() == current_date:
+            return self.day_streak
+        elif self.last_login.date() == previous_date:
             return self.day_streak + 1
         else:
             return 1
