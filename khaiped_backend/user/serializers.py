@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from database.models import User
+from database.models import User, WordLearned
 from django.contrib.auth import authenticate
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -24,6 +24,11 @@ class UserLogInSerializer(serializers.ModelSerializer):
         raise serializers.ValidationError("Unable to log in.")
 
 class UserSerializer(serializers.ModelSerializer):
+    word_learned_count = serializers.SerializerMethodField()
+
+    def get_word_learned_count(self, user):
+        return WordLearned.objects.filter(user_id=user).count()
+
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('username','game_played', 'quiz_score', 'quiz_taken', 'day_streak', 'word_learned_count')

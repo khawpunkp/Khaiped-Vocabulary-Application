@@ -56,7 +56,7 @@ class Word(models.Model):
 
 class User(AbstractBaseUser):
     username = models.CharField(max_length=32, unique=True, null=False)
-    password = models.CharField(max_length=32, null=False)
+    password = models.CharField(max_length=128, null=False)
     is_admin = models.BooleanField(default=False)
     game_played = models.IntegerField(default=0, null=False)
     quiz_score = models.IntegerField(default=0, null=False)

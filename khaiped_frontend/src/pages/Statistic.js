@@ -1,14 +1,34 @@
-import React from 'react'
+import { React, useState, useEffect } from "react";
 import StatContainer from '../components/statistic/StatContainer'
+import axios from 'axios'
 
 function Statistic() {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get('http://127.0.0.1:8000/user/user', { withCredentials: true })
+      .then(response => {
+        setUserData(response.data.user);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="content flex flex-col justify-center">
-      <h1 className='font-black text-[80px]'>{'Statistic'}</h1>
-      <StatContainer title='Word Learned' value="54" classifier='Words'/>
-      <StatContainer title='Game Played' value="54" classifier='Games'/>
-      <StatContainer title='Quiz Score' value="54" classifier='Percent'/>
-      <StatContainer title='Day Streak' value="54" classifier='Days'/>
+      {userData ? (
+        <div>
+          <h1 className='font-black text-[80px] text-center'>{userData.username}'s Statistic</h1>
+          <StatContainer title='Word Learned' value={userData.word_learned_count} classifier='Words' />
+          <StatContainer title='Game Played' value={userData.game_played} classifier='Games' />
+          <StatContainer title='Quiz Score' value={((userData.quiz_score) / (userData.quiz_taken)) * 100} classifier='Percent' />
+          <StatContainer title='Day Streak' value={userData.day_streak} classifier='Days' />
+        </div>
+      ) : (
+        <h1 className='font-black text-[80px]'>Loading...</h1>
+      )}
     </div>
   )
 }

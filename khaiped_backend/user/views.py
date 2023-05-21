@@ -49,4 +49,5 @@ class SessionDataView(APIView):
             session_data['user_id'] = request.session.get('user_id', None)
             session_data['username'] = request.session.get('username', None)
             # Add more session data as needed
-        return Response(session_data)    
+        return Response(session_data)
+    
