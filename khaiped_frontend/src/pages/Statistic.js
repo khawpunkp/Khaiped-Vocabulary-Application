@@ -19,15 +19,17 @@ function Statistic() {
   return (
     <div className="content flex flex-col justify-center">
       {userData ? (
-        <div>
+        <div className="space-y-6">
           <h1 className='font-black text-[80px] text-center'>{userData.username}'s Statistic</h1>
-          <StatContainer title='Word Learned' value={userData.word_learned_count} classifier='Words' />
-          <StatContainer title='Game Played' value={userData.game_played} classifier='Games' />
-          <StatContainer title='Quiz Score' value={((userData.quiz_score) / (userData.quiz_taken)) * 100} classifier='Percent' />
-          <StatContainer title='Day Streak' value={userData.day_streak} classifier='Days' />
+          <div>
+            <StatContainer title='Word Learned' value={userData.word_learned_count} classifier='Words' />
+            <StatContainer title='Game Played' value={userData.game_played} classifier='Games' />
+            <StatContainer title='Quiz Score' value={((userData.quiz_score) / (userData.quiz_taken)) * 100} classifier='Percent' />
+            <StatContainer title='Day Streak' value={userData.day_streak} classifier='Days' />
+          </div>
         </div>
       ) : (
-        <h1 className='font-black text-[80px]'>Loading...</h1>
+        <h1 className='font-black text-[80px] text-center'>Loading...</h1>
       )}
     </div>
   )
