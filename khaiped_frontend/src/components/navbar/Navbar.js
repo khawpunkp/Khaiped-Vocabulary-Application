@@ -7,12 +7,27 @@ import UserButton from "../login/UserButton";
 import GuestButton from "../login/GuestButton";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 function Navbar() {
   const [isShown, setIsShown] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const refUserButton = useRef();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    
+    axios
+      .get('http://127.0.0.1:8000/user/user', { withCredentials: true })
+      .then(response => {
+        setIsLogin(true);
+        // console.log(response);
+      })
+      .catch(error => {
+        setIsLogin(false);
+        // console.log(error);
+      });
+  }, [isShown]);
 
   useEffect(() => {
     let handleClickOutside = (event) => {
@@ -38,11 +53,11 @@ function Navbar() {
             <Searchbar />
           </div>
           <div ref={refUserButton}>
-            <button onClick={() => setIsShown(!isShown)}  className="user rounded-full p-1 bg-white">
+            <button onClick={() => setIsShown(!isShown)} className="user rounded-full p-1 bg-white">
               <img src={user_icon} alt="User Icon" className="transform scale-[0.85]" />
             </button>
-            {isShown && isLogin && <div className='absolute right-3 top-[65px]'> <UserButton onClose={() => setIsShown(false)}/> </div>}
-            {isShown && !isLogin && <div className='absolute right-3 top-[65px]'> <GuestButton onClose={() => setIsShown(false)}/> </div>}
+            {isShown && isLogin && <div className='absolute right-3 top-[65px]'> <UserButton onClose={() => setIsShown(false)} /> </div>}
+            {isShown && !isLogin && <div className='absolute right-3 top-[65px]'> <GuestButton onClose={() => setIsShown(false)} /> </div>}
           </div>
         </div>
       </nav>
