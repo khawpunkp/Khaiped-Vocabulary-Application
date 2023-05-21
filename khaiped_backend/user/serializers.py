@@ -20,6 +20,7 @@ class UserLogInSerializer(serializers.ModelSerializer):
     def check_user(self, data):
         user = authenticate(username = data['username'], password = data['password'])
         if user and user.is_active:
+            user.update_last_login()
             return user
         raise serializers.ValidationError("Unable to log in.")
 
