@@ -15,8 +15,7 @@ function Navbar() {
   const refUserButton = useRef();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    
+  useEffect(() => {    
     axios
       .get('http://127.0.0.1:8000/user/user', { withCredentials: true })
       .then(response => {
