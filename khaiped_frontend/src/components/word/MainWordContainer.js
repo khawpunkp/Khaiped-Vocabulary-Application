@@ -6,6 +6,7 @@ import axios from 'axios'
 
 function MainWordContainer(props) {
     const [wordData, setWordData] = useState(null);
+    // const [isRandom, setIsRandom] = useState(false);
 
     const randomWord = () => {
         axios
@@ -18,9 +19,28 @@ function MainWordContainer(props) {
             });
     }
 
+
+
     useEffect(() => {
-        randomWord()
-    }, []);
+        const getWord = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8000/word/${props.wordID}`);
+                setWordData(response.data.word);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        if (props.isRandom) {
+            randomWord()
+            console.log('random');
+        }
+        else {
+            getWord()
+            console.log(props.wordID);
+            console.log('not');
+        }
+    }, [props.isRandom, props.wordID]);
 
     const handleClose = () => {
         props.onClose(false);

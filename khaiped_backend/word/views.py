@@ -19,3 +19,12 @@ class RandomWordView(APIView):
             return Response({'word': serializer.data}, status=status.HTTP_200_OK)
         else:
             return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
+
+class WordDetailView(APIView):
+    def get(self, request, pk):
+        try:
+            word = Word.objects.get(pk=pk)
+            serializer = WordSerializer(word)
+            return Response({'word': serializer.data}, status=status.HTTP_200_OK)
+        except Word.DoesNotExist:
+            return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)

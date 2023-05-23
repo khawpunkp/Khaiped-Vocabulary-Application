@@ -32,7 +32,13 @@ function HomeButtonContainer() {
                 </div>
             </div>
             {rndWordPopUp && <div className="fixed top-[70px] bottom-0 left-0 right-0 flex justify-center items-center">
-                <MainWordContainer close = {true} sound = {true} refresh = {true}  onClose={() => setRndWordPopUp(false)}/>
+                <MainWordContainer
+                    close={true}
+                    sound={true}
+                    refresh={true}
+                    isRandom={true}
+                    onClose={() => setRndWordPopUp(false)
+                    } />
             </div>}
         </div>
     )

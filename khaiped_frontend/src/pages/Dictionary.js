@@ -1,5 +1,6 @@
 import React from 'react'
 import Searchbar from '../components/navbar/Searchbar'
+import SearchWordConatiner from '../components/word/SearchWordConatiner'
 
 function Dictionary() {
   return (
@@ -8,7 +9,7 @@ function Dictionary() {
     Dictionary
     </div>    
     <Searchbar isNav = {false}/>
-    
+    <SearchWordConatiner/>
     </div>
   )
 }
