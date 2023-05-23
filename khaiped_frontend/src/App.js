@@ -8,6 +8,7 @@ import Home from './pages/Home.js'
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Statistic from './pages/Statistic';
+import Dictionary from './pages/Dictionary';
 
 import axios from 'axios'
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/statistic' element={<Statistic />} />
+          <Route path='/dictionary' element={<Dictionary />} />
         </Routes>
       </BrowserRouter>
     </div>

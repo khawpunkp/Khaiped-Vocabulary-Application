@@ -6,9 +6,12 @@ import quizButton from "../../assets/svg/home/ButtonQuizEmpty.svg";
 import bookButton from "../../assets/svg/home/ButtonBookEmpty.svg";
 import HomeButton from './HomeButton'
 import MainWordContainer from "../word/MainWordContainer";
+import { useNavigate } from 'react-router-dom'
 
 function HomeButtonContainer() {
     const [rndWordPopUp, setRndWordPopUp] = useState(false)
+    const navigate = useNavigate();
+
     return (
         <div className="relative">
             <div className="flex flex-col my-8 space-y-6">
@@ -24,7 +27,7 @@ function HomeButtonContainer() {
                 <div className="QuizButton">
                     <HomeButton buttonImg={quizButton} title="Quiz" description="Let’s test your knowledge" />
                 </div>
-                <div className="DictButton">
+                <div className="DictButton" onClick={() => navigate("/dictionary")}>
                     <HomeButton buttonImg={bookButton} title="Dictionary" description="An ordinary dictionary" />
                 </div>
             </div>

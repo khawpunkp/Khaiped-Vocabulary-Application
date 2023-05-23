@@ -49,7 +49,7 @@ function Navbar() {
         </button>
         <div className="flex space-x-4 items-center">
           <div className="searchbar">
-            <Searchbar />
+            <Searchbar isNav = {true}/>
           </div>
           <div ref={refUserButton}>
             <button onClick={() => setIsShown(!isShown)} className="user rounded-full p-1 bg-white">

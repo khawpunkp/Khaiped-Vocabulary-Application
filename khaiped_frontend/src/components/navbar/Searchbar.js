@@ -1,13 +1,13 @@
 import React from "react";
 import magnify from "../../assets/svg/navbar/Magnify.svg";
 
-function Searchbar() {
+function Searchbar(props) {
   return (
-    <div className="bg-white px-4 py-1 rounded-full flex justify-between items-center">
+    <div className={`bg-white px-4 py-1 rounded-full flex justify-between items-center ${props.isNav ? 'w-[320px]' : 'w-[500px]'}`}>
       <input
         type="text"
         placeholder="Search a word"
-        className="w-full bg-transparent pt-2 pb-1 outline-none text-lg placeholder-[#590070] placeholder-opacity-[0.28]"
+        className={`w-full bg-transparent pt-2 pb-1 outline-none ${props.isNav ? 'text-lg' : 'text-2xl'} placeholder-[#590070] placeholder-opacity-[0.28]`}
       />
       <button className="py-2">
         <img src={magnify} alt="Magnify Icon"/>
