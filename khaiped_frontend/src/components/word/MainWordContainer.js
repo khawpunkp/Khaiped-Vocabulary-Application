@@ -32,13 +32,11 @@ function MainWordContainer(props) {
         };
 
         if (props.isRandom) {
-            randomWord()
-            console.log('random');
+            randomWord();
         }
         else {
             getWord()
             console.log(props.wordID);
-            console.log('not');
         }
     }, [props.isRandom, props.wordID]);
 

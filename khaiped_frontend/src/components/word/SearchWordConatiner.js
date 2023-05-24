@@ -4,24 +4,22 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import MainWordContainer from "./MainWordContainer";
 
-function SearchWordConatiner() {
+function SearchWordContainer(props) {
     const [wordData, setWordData] = useState(null);
     const [wordPopUp, setWordPopUp] = useState(false)
 
-    const randomWord = () => {
-        axios
-            .get('http://127.0.0.1:8000/word/random', { withCredentials: true })
-            .then(response => {
-                setWordData(response.data.word);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
     useEffect(() => {
-        randomWord()
-    }, []);
+        const getWord = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8000/word/${props.wordID}`);
+                setWordData(response.data.word);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        getWord();
+    }, [props.wordID]);    
 
     return (
         <div className="border-y-2 border-black w-fit">
@@ -31,7 +29,7 @@ function SearchWordConatiner() {
                         <h1 className="w-[500px] thai text-4xl font-bold text-left">{wordData.word}</h1>
                         <h2 className="w-[380px] thai text-3xl font-bold text-left">{wordData.tran_th}</h2>
                         <button onClick={() => setWordPopUp(true)} className='text-left'>
-                            <FontAwesomeIcon icon={faEye} style={{ fontSize: "40px" }} />
+                            <FontAwesomeIcon icon={faEye} style={{ fontSize: "30px" }} />
                         </button>
                     </div>
                 ) : (
@@ -45,7 +43,7 @@ function SearchWordConatiner() {
                         sound={true}
                         refresh={false}
                         isRandom={false}
-                        wordID = {wordData.id}
+                        wordID={wordData.id}
                         onClose={() => setWordPopUp(false)
                         } />
                 </div>
@@ -54,4 +52,4 @@ function SearchWordConatiner() {
     )
 }
 
-export default SearchWordConatiner
+export default SearchWordContainer

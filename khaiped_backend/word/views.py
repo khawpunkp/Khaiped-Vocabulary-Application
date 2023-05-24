@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .serializers import WordSerializer
 from database.models import Word, WordLearned
 import random
+from django.db.models import Q
 
 # Create your views here.
 class RandomWordView(APIView):
@@ -28,3 +29,16 @@ class WordDetailView(APIView):
             return Response({'word': serializer.data}, status=status.HTTP_200_OK)
         except Word.DoesNotExist:
             return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
+        
+class SearchWordView(APIView):
+    def get(self, request):
+        query =  request.GET.get('q')
+        if not query:
+            return Response({"message": "Please provide a search query."}, status=status.HTTP_400_BAD_REQUEST)
+        result = Word.objects.filter(
+            Q(word__icontains=query) | Q(tran_th__icontains=query)
+        ).distinct()
+        if not result:
+            return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
+        serializer = WordSerializer(result, many = True)        
+        return Response({'words': serializer.data}, status=status.HTTP_200_OK)

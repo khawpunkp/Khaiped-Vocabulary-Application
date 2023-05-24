@@ -4,11 +4,7 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/navbar/Navbar';
 
-import Home from './pages/Home.js'
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Statistic from './pages/Statistic';
-import Dictionary from './pages/Dictionary';
+import { Home, Login, Register, Statistic, Dictionary, SearchResult } from './pages';
 
 import axios from 'axios'
 
@@ -29,6 +25,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/statistic' element={<Statistic />} />
           <Route path='/dictionary' element={<Dictionary />} />
+          <Route path="/search/:searchQuery" element={<SearchResult />} />
         </Routes>
       </BrowserRouter>
     </div>
