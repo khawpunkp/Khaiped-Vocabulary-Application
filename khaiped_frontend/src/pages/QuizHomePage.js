@@ -1,15 +1,14 @@
 import React from 'react'
-import Searchbar from '../components/navbar/Searchbar'
 
-function Dictionary() {
+function QuizHomePage() {
   return (
     <div className='content flex flex-col justify-center'>
       <div className="text-[128px] font-bold">
-        Dictionary
+        Quiz
       </div>
-      <Searchbar isNav={false} />
+      <button className='submitButton'>{'Start'}</button>      
     </div>
   )
 }
 
-export default Dictionary
+export default QuizHomePage

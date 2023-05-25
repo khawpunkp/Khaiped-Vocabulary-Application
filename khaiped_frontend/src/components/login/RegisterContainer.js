@@ -58,7 +58,7 @@ function RegisterContainer() {
                 {<p className={`text-[20px] font-bold ${isSubmit ? (isCorrect ? 'text-green-500' : 'text-red-500') : 'opacity-0'}`}>
                     {isCorrect ? 'Registration Successfull' : 'Your Username is already taken'}
                 </p>}
-                <button type="submit" className='loginButton'>{'Register'}</button>
+                <button type="submit" className='submitButton'>{'Register'}</button>
                 <div className="flex flex-row items-center space-x-2">
                     <p className='font-bold '>Already have account?</p>
                     <button onClick={() => navigate("/login")} className='font-bold text-primary'>{'Log In'}</button>

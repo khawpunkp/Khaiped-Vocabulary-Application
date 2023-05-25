@@ -4,7 +4,7 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/navbar/Navbar';
 
-import { Home, Login, Register, Statistic, Dictionary, SearchResult } from './pages';
+import { Home, Login, Register, Statistic, Dictionary, SearchResult, QuizHomePage, QuizPage } from './pages';
 
 import axios from 'axios'
 
@@ -26,6 +26,8 @@ function App() {
           <Route path='/statistic' element={<Statistic />} />
           <Route path='/dictionary' element={<Dictionary />} />
           <Route path="/search/:searchQuery" element={<SearchResult />} />
+          <Route path="/quiz" element={<QuizHomePage />} />
+          <Route path="/quiz-page" element={<QuizPage />} />
         </Routes>
       </BrowserRouter>
     </div>
