@@ -27,7 +27,7 @@ function App() {
           <Route path='/dictionary' element={<Dictionary />} />
           <Route path="/search/:searchQuery" element={<SearchResult />} />
           <Route path="/quiz" element={<QuizHomePage />} />
-          <Route path="/quiz-page" element={<QuizPage />} />
+          <Route path="/quiz-page/:mode/:?" element={<QuizPage />} />
         </Routes>
       </BrowserRouter>
     </div>
