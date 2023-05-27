@@ -6,7 +6,11 @@ function QuizHomePage() {
       <div className="text-[128px] font-bold">
         Quiz
       </div>
-      <button className='submitButton'>{'Start'}</button>      
+      <div className="">
+        <button className='submitButton'>{'Easy'}</button>
+        <button className='submitButton'>{'Hard'}</button>
+      </div>
+
     </div>
   )
 }
