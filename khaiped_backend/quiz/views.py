@@ -8,14 +8,16 @@ class QuizAPIView(APIView):
     def get(self, request):
         mode = request.GET.get('mode')
         allWords = request.GET.get('allWords')
+        allWords = allWords.lower() == 'true'
 
         words = Word.objects.all()
 
-        if allWords.lower() == 'false' and request.user:            
+        if not allWords and request.user:            
             learned_id = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
             questions = words.filter(id__in=learned_id)
-        elif allWords.lower() == 'true' or not request.user:            
-            questions = words         
+        elif allWords or not request.user:            
+            questions = words   
+              
 
         if mode == "easy":
             return self.generate_easy_quiz(words, questions)
