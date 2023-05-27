@@ -9,17 +9,12 @@ function QuizPage() {
   const allWords = urlParams.get('allWords');
   const navigate = useNavigate();
 
-  // console.log(mode);
-  // console.log(allWord);
-
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [choices, setChoices] = useState([]);
   const [score, setScore] = useState(0);
   const [questionIndex, setQuestionIndex] = useState(1);
-  // const [isCorrect, setIsCorrect] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
-  // const [userClicked, setUserClicked] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(0);
   const [disableButton, setDisableButton] = useState(false)
 
