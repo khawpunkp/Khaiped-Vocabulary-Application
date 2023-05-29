@@ -6,16 +6,16 @@ import random
 
 class QuizAPIView(APIView):
     def get(self, request):
-        mode = request.GET.get('mode')
-        allWords = request.GET.get('allWords')
+        mode = request.GET.get('m')
+        allWords = request.GET.get('a')
         allWords = allWords.lower() == 'true'
 
         words = Word.objects.all()
 
-        if not allWords and request.user:            
+        if not allWords and request.user.is_authenticated:            
             learned_id = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
             questions = words.filter(id__in=learned_id)
-        elif allWords or not request.user:            
+        else:            
             questions = words   
               
 
