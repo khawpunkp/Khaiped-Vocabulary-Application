@@ -31,10 +31,9 @@ input::placeholder {
     align-items: center;
 }
 
-.loginInput {
+.inputBox {
     background-color: white;
     padding: 0.25rem 1rem;
-    width: 400px;
     height: 60px;
     border-radius: 20px;
     display: flex;

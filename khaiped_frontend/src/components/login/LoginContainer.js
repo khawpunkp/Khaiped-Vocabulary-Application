@@ -36,7 +36,7 @@ function LogInContainer() {
             <h1 className='font-black text-[80px]'>{'Log In'}</h1>
             <form className="form flex flex-col items-center space-y-7">
                 <div className="flex flex-col space-y-10">
-                    <div className='loginInput'>
+                    <div className='inputBox w-[400px]'>
                         <input type="username"
                             id="username"
                             placeholder="Username"
@@ -45,7 +45,7 @@ function LogInContainer() {
                             onChange={(event) => setUsername(event.target.value)}
                         />
                     </div>
-                    <div className="loginInput">
+                    <div className="inputBox w-[400px]">
                         <input type="password"
                             id="password"
                             placeholder="Password"
