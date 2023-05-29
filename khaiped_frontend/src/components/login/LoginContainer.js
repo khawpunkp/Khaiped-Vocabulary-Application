@@ -40,7 +40,7 @@ function LogInContainer() {
                         <input type="username"
                             id="username"
                             placeholder="Username"
-                            className="w-full bg-transparent pt-2 pb-1 outline-none text-lg placeholder-[#590070] placeholder-opacity-[0.28]"
+                            className="inputText"
                             value={username}
                             onChange={(event) => setUsername(event.target.value)}
                         />
@@ -49,7 +49,7 @@ function LogInContainer() {
                         <input type="password"
                             id="password"
                             placeholder="Password"
-                            className="w-full bg-transparent pt-2 pb-1 outline-none text-lg placeholder-[#590070] placeholder-opacity-[0.28]"
+                            className="inputText"
                             value={password}
                             onChange={(event) => setPassword(event.target.value)}
                         />

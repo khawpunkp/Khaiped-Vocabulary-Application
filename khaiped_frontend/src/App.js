@@ -29,9 +29,9 @@ function App() {
           <Route path="/quiz" element={<QuizHomePage />} />
           <Route path="/quiz-page/:mode/:?" element={<QuizPage />} />
           <Route path="/game" element={<GameHomePage />} />
-          <Route path="/game-page/:allWords" element={<GamePage />} />
+          <Route path="/game-page/:mode" element={<GamePage />} />
           <Route path="/flashcard" element={<FlashcardHomePage />} />
-          <Route path="/flashcard-page/:mode/:?" element={<FlashcardPage />} />
+          <Route path="/flashcard-page/:?" element={<FlashcardPage />} />
         </Routes>
       </BrowserRouter>
     </div>
