@@ -4,3 +4,5 @@ export { default as Register } from './Register.js';
 export { default as Statistic } from './Statistic.js';
 export { default as Dictionary } from './Dictionary.js';
 export { default as SearchResult } from './SearchResult.js';
+export { default as QuizHomePage } from './QuizHomePage.js';
+export { default as QuizPage } from './QuizPage.js';

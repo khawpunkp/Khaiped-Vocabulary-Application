@@ -24,7 +24,7 @@ function HomeButtonContainer() {
                 <div className="GameButton">
                     <HomeButton buttonImg={gameButton} title="Word Scramble" description="Have fun!" />
                 </div>
-                <div className="QuizButton">
+                <div className="QuizButton" onClick={() => navigate("/quiz")}>
                     <HomeButton buttonImg={quizButton} title="Quiz" description="Let’s test your knowledge" />
                 </div>
                 <div className="DictButton" onClick={() => navigate("/dictionary")}>

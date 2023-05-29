@@ -58,7 +58,7 @@ function LogInContainer() {
                 {<p className={`text-[20px] font-bold ${isSubmit ? (isCorrect ? 'text-green-500' : 'text-red-500') : 'opacity-0'}`}>
                     {isCorrect ? 'Login Successfull' : 'Incorrect Username or Password'}
                 </p>}
-                <button onClick={submitLogin} className='loginButton'>{'Log In'}</button>
+                <button onClick={submitLogin} className='submitButton'>{'Log In'}</button>
                 <div className="flex flex-row items-center space-x-2">
                     <p className='font-bold '>Do not have account?</p>
                     <button onClick={() => navigate("/register")} className='font-bold text-primary'>{'Register'}</button>

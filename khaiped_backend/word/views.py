@@ -9,14 +9,24 @@ from django.db.models import Q
 # Create your views here.
 class RandomWordView(APIView):
     def get(self, request):
+
+        previous_word_id = request.session.get('previous_word_id')
+
         if request.user.is_authenticated:
             learned_words = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
             words = Word.objects.exclude(id__in=learned_words)
         else:
             words = Word.objects.all()
+            
+        if previous_word_id is not None:
+            words = words.exclude(id=previous_word_id)
+
         if words.exists():
             random_word = random.choice(words)
             serializer = WordSerializer(random_word)
+
+            request.session['previous_word_id'] = random_word.id
+
             return Response({'word': serializer.data}, status=status.HTTP_200_OK)
         else:
             return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)

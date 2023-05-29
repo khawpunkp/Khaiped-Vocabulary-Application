@@ -6,7 +6,6 @@ import axios from 'axios'
 
 function MainWordContainer(props) {
     const [wordData, setWordData] = useState(null);
-    // const [isRandom, setIsRandom] = useState(false);
 
     const randomWord = () => {
         axios
@@ -19,26 +18,27 @@ function MainWordContainer(props) {
             });
     }
 
-
+    const getWordData = () => {
+        axios
+            .get(`http://127.0.0.1:8000/word/${props.wordID}`, { withCredentials: true })
+            .then(response => {
+                setWordData(response.data.word);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
     useEffect(() => {
-        const getWord = async () => {
-            try {
-                const response = await axios.get(`http://127.0.0.1:8000/word/${props.wordID}`);
-                setWordData(response.data.word);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
+        console.log('use effect');
         if (props.isRandom) {
             randomWord();
         }
         else {
-            getWord()
-            console.log(props.wordID);
+            getWordData()
         }
-    }, [props.isRandom, props.wordID]);
+        // }
+    }, []);
 
     const handleClose = () => {
         props.onClose(false);
