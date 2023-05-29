@@ -18,10 +18,10 @@ function HomeButtonContainer() {
                 <div className="RandomButton" onClick={() => setRndWordPopUp(true)}>
                     <HomeButton buttonImg={randomButton} title="Random Word" description="New word you have never learn" />
                 </div>
-                <div className="CardButton">
+                <div className="CardButton" onClick={() => navigate("/flashcard")}>
                     <HomeButton buttonImg={cardButton} title="Flashcard" description="Memorise the word" />
                 </div>
-                <div className="GameButton">
+                <div className="GameButton" onClick={() => navigate("/game")}>
                     <HomeButton buttonImg={gameButton} title="Word Scramble" description="Have fun!" />
                 </div>
                 <div className="QuizButton" onClick={() => navigate("/quiz")}>

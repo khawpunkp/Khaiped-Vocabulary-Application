@@ -6,3 +6,7 @@ export { default as Dictionary } from './Dictionary.js';
 export { default as SearchResult } from './SearchResult.js';
 export { default as QuizHomePage } from './QuizHomePage.js';
 export { default as QuizPage } from './QuizPage.js';
+export { default as GameHomePage } from './GameHomePage.js';
+export { default as GamePage } from './GamePage.js';
+export { default as FlashcardHomePage } from './FlachcardHomePage.js';
+export { default as FlashcardPage } from './FlashcardPage.js';

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 
 function QuizHomePage() {
   const [isInclude, setIsInclude] = useState(false);
-  // const [selectedMode, setSelectedMode] = useState('');
   const navigate = useNavigate();
 
 
@@ -12,7 +11,6 @@ function QuizHomePage() {
   };
 
   const handleModeSelection = (mode) => {
-    // setSelectedMode(mode);
     navigate(`/quiz-page/${mode}/?allWords=${isInclude}`)
   }
 
