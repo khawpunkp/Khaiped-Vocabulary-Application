@@ -1,5 +1,4 @@
 import React from "react";
-import user_icon from "../../assets/svg/navbar/User.svg";
 import logo from "../../assets/svg/navbar/Logo.svg";
 // import magnify from "../assets/svg/Magnify.svg";
 import Searchbar from "./Searchbar";
@@ -8,6 +7,8 @@ import GuestButton from "../login/GuestButton";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 function Navbar() {
   const [isShown, setIsShown] = useState(false);
@@ -52,8 +53,8 @@ function Navbar() {
             <Searchbar isNav = {true}/>
           </div>
           <div ref={refUserButton}>
-            <button onClick={() => setIsShown(!isShown)} className="user rounded-full p-1 bg-white">
-              <img src={user_icon} alt="User Icon" className="transform scale-[0.85]" />
+            <button onClick={() => setIsShown(!isShown)} className="user rounded-full p-1 bg-white w-[48px] h-[48px]">
+              <FontAwesomeIcon icon={faUser} style={{ fontSize: "27px" }} />
             </button>
             {isShown && isLogin && <div className='absolute right-3 top-[65px]'> <UserButton onClose={() => setIsShown(false)} /> </div>}
             {isShown && !isLogin && <div className='absolute right-3 top-[65px]'> <GuestButton onClose={() => setIsShown(false)} /> </div>}

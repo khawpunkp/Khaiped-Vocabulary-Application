@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import LetterBox from '../components/game/LetterBox'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import GameResult from '../components/game/GameResult'
 
 function GamePage() {
   const rowContainer = "flex flex-row space-x-5"
@@ -13,6 +14,7 @@ function GamePage() {
   const [hint, setHint] = useState('');
   const [scrambledWordIndex, setScrambledWordIndex] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
 
   const getWord = () => {
@@ -57,8 +59,10 @@ function GamePage() {
 
   const handleSubmitButton = () => {
     setIsSubmit(true)
-    if (correctAnswer.toLowerCase() === inputValue.toLowerCase())
+    if (correctAnswer.toLowerCase() === inputValue.toLowerCase()) {
+      setIsCorrect(true)
       console.log('correct');
+    }
     else
       console.log('wrong');
   }
@@ -75,7 +79,6 @@ function GamePage() {
             {correctAnswer.split('').map((letter, i) => {
               const answerSplit = correctAnswer.split('')
               const isLetterCorrect = answerSplit[i].toUpperCase() === inputValue[i]
-              console.log(answerSplit[i],inputValue[i]);
               return (<LetterBox
                 key={`${letter}_${i}`}
                 letter={inputValue[i]?.toUpperCase()}
@@ -119,6 +122,9 @@ function GamePage() {
           <h1 className='font-black text-[80px] text-center'>Loading...</h1>
         </div>
       )}
+      {isCorrect && <div className="fixed top-[70px] bottom-0 left-0 right-0 flex justify-center items-center">
+                <GameResult/>
+      </div>}
     </div>
   )
 }
