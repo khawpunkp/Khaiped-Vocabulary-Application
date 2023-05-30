@@ -41,7 +41,7 @@ input::placeholder {
 }
 
 .inputText {
-    @apply w-full bg-transparent pt-2 pb-1 outline-none text-lg placeholder-[#590070] placeholder-opacity-30
+    @apply w-full bg-transparent pt-2 pb-1 outline-none text-lg placeholder-placeholderText placeholder-opacity-30
 }
 
 .submitButton {

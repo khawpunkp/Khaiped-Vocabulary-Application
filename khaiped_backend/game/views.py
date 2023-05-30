@@ -11,7 +11,32 @@ class GetGameView(APIView):
         words = Word.objects.all()
         if words.exists():
             random_word = random.choice(words)
+            scrambled_word, index = self.scramble_word(random_word.word)
             serializer = WordSerializer(random_word)
-            return Response({'word': serializer.data}, status=status.HTTP_200_OK)
+            data = serializer.data
+            data['scrambled_word'] = scrambled_word
+            data['index'] = index
+            return Response({'word': data}, status=status.HTTP_200_OK)
         else:
             return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
+    
+    
+    
+    def scramble_word(self, word):
+        word_list = list(word.upper())
+        random.shuffle(word_list)
+        scrambled_word = ''.join(word_list)
+
+        index = ''
+        letter_counts = {}
+
+        for i, letter in enumerate(word_list):
+            # scrambled_word += letter
+            if letter in letter_counts:
+                letter_counts[letter] += 1
+            else:
+                letter_counts[letter] = 0
+
+            index += f'{letter_counts[letter]}'
+
+        return scrambled_word, index
