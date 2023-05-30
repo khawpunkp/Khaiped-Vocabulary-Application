@@ -55,3 +55,7 @@ input::placeholder {
     font-weight: bold;
     font-size: 24px;
 }
+
+.contentBox {
+     @apply relative w-[580px] h-[580px] bg-wordContainer rounded-[40px] border-4 border-black
+}

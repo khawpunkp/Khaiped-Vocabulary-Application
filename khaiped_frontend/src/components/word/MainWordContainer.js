@@ -31,7 +31,7 @@ function MainWordContainer(props) {
     }
 
     useEffect(() => {
-        console.log('use effect');
+        // console.log('use effect');
         if (props.isRandom) {
             randomWord();
         }
@@ -46,7 +46,7 @@ function MainWordContainer(props) {
     };
 
     return (
-        <div className={`relative w-[580px] h-[580px] bg-wordContainer rounded-[40px] border-4 border-black  ${wordData ? ' ' : 'flex items-center justify-center'}`}>
+        <div className={`contentBox  ${wordData ? ' ' : 'flex items-center justify-center'}`}>
             {wordData ? (
                 <div className="flex flex-col items-center">
                     <h1 className="h-[100px] px-[55px] text-[64px] font-bold absolute top-[25%]">{wordData.word}</h1>

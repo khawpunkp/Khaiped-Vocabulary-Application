@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import WordSerializer
+from .serializers import WordSerializer, WordRootSerializer
 from database.models import Word, WordLearned
 import random
 from django.db.models import Q
@@ -36,9 +36,15 @@ class RandomWordView(APIView):
 class WordDetailView(APIView):
     def get(self, request, pk):
         try:
+            # word_data = []
             word = Word.objects.get(pk=pk)
-            serializer = WordSerializer(word)
-            return Response({'word': serializer.data}, status=status.HTTP_200_OK)
+            # serializer = WordSerializer(word)
+            word_serializer = WordSerializer(word)
+            word_root_serializer = WordRootSerializer(word.root_id)  # Access the WordRoot object through the 'root_id' field
+            # word_data.append({'word': word_serializer.data, 'word_root': word_root_serializer.data})
+
+            return Response({'word': word_serializer.data, 'word_root': word_root_serializer.data}, status=status.HTTP_200_OK)
+            # return Response({'word': serializer.data}, status=status.HTTP_200_OK)
         except Word.DoesNotExist:
             return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
         
