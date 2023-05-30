@@ -9,6 +9,8 @@ from django.db.models import Q
 # Create your views here.
 class RandomWordView(APIView):
     def get(self, request):
+        # allWords = request.GET.get('a')
+        # allWords = allWords.lower() == 'true'
 
         previous_word_id = request.session.get('previous_word_id')
 

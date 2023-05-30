@@ -20,7 +20,7 @@ function QuizPage() {
 
   const getQuiz = () => {
     axios
-      .get(`http://127.0.0.1:8000/quiz/getQuiz/?mode=${mode}&allWords=${allWords}`)
+      .get(`http://127.0.0.1:8000/quiz/getQuiz/?m=${mode}&a=${allWords}`)
       .then(response => {
         setQuestion(response.data.question)
         setAnswer(response.data.answer)

@@ -6,18 +6,25 @@ import random
 
 class QuizAPIView(APIView):
     def get(self, request):
-        mode = request.GET.get('mode')
-        allWords = request.GET.get('allWords')
+        mode = request.GET.get('m')
+        allWords = request.GET.get('a')
         allWords = allWords.lower() == 'true'
 
         words = Word.objects.all()
 
-        if not allWords and request.user:            
+        if not allWords and request.user.is_authenticated:            
             learned_id = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
             questions = words.filter(id__in=learned_id)
-        elif allWords or not request.user:            
-            questions = words   
-              
+            if not questions:
+                questions = words
+        else:            
+            questions = words                 
+        
+        if not words:
+            return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
+    
+        if not questions:
+            return Response({"message": "No questions available."}, status=status.HTTP_204_NO_CONTENT)
 
         if mode == "easy":
             return self.generate_easy_quiz(words, questions)
@@ -26,8 +33,8 @@ class QuizAPIView(APIView):
         else:
             return Response({"message": "Invalid quiz mode."}, status=400)
         
-    def generate_easy_quiz(self, words, questions):
-        
+    def generate_easy_quiz(self, words, questions):       
+
         question_word = random.choice(questions)
             
         question_type = random.randint(1, 3)

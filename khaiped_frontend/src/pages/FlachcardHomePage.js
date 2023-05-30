@@ -10,8 +10,8 @@ function FlachcardHomePage() {
       setIsInclude(event.target.checked);
     };
   
-    const handleModeSelection = (mode) => {
-      navigate(`/flashcard-page/${mode}/?learnedWords=${isInclude}`)
+    const handleModeSelection = () => {
+      navigate(`/flashcard-page/?learnedWords=${isInclude}`)
     }
   
     return (
@@ -20,12 +20,9 @@ function FlachcardHomePage() {
           Flashcard
         </div>
         <div className="flex flex-row space-x-4">
-          <button className='submitButton' onClick={() => handleModeSelection('select')}>
-            Select Words
-          </button>
-          <button className='submitButton' onClick={() => handleModeSelection('random')}>
-            Random
-          </button>
+          <button className='submitButton' onClick={() => handleModeSelection()}>
+            Start
+          </button>          
         </div>
         <div className="flex flex-row space-x-3 items-center">
           <input
