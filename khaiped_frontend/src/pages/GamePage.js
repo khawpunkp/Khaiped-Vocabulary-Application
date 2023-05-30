@@ -12,8 +12,7 @@ function GamePage() {
   const [scrambledWord, setScrambledWord] = useState('');
   const [hint, setHint] = useState('');
   const [scrambledWordIndex, setScrambledWordIndex] = useState('');
-
-  // const [isCorrected, setIsCorrected] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
 
   const getWord = () => {
@@ -41,21 +40,23 @@ function GamePage() {
   function countLetterOccurrences(letter) {
     const input = inputValue.toUpperCase();
     const searchLetter = letter.toUpperCase();
-    let count = 0;  
+    let count = 0;
     for (let i = 0; i < input.length; i++) {
       if (input[i] === searchLetter) {
         count++;
       }
-    }  
+    }
     return count;
   }
 
   const handleInputChange = (event) => {
     const value = event.target.value.toUpperCase();
-    setInputValue(value);    
+    setInputValue(value);
+    setIsSubmit(false);
   };
 
   const handleSubmitButton = () => {
+    setIsSubmit(true)
     if (correctAnswer.toLowerCase() === inputValue.toLowerCase())
       console.log('correct');
     else
@@ -71,11 +72,19 @@ function GamePage() {
       {wordData ? (
         <div className='content flex flex-col justify-center space-y-10'>
           <div className={`${rowContainer} justify-center `}>
-            {correctAnswer.split('').map((letter, i) => (
-              <LetterBox key={`${letter}_${i}`} letter={inputValue[i]?.toUpperCase()} />
-            ))}
+            {correctAnswer.split('').map((letter, i) => {
+              const answerSplit = correctAnswer.split('')
+              const isLetterCorrect = answerSplit[i].toUpperCase() === inputValue[i]
+              console.log(answerSplit[i],inputValue[i]);
+              return (<LetterBox
+                key={`${letter}_${i}`}
+                letter={inputValue[i]?.toUpperCase()}
+                submit={isSubmit}
+                correct={isLetterCorrect}
+              />)
+            })}
           </div>
-          <div className={`${rowContainer} justify-center `}>            
+          <div className={`${rowContainer} justify-center `}>
             {scrambledWord.map((letter, i) => {
               const isMatch = countLetterOccurrences(letter) > scrambledWordIndex[i];
 
@@ -89,11 +98,7 @@ function GamePage() {
                 </p>
               );
             })}
-            {/* {scrambledWord.map((letter, i) => (
-            <p key={`${letter}_${i}`} className={`text-[40px] font-black text-center ${i === firstMatchIndex ? 'text-red-500' : ''}`}> {scrambledWord[i]?.toUpperCase()} </p>
-            ))} */}
           </div>
-          {/* <div className="text-[40px] font-black text-center">{scrambledWord}</div> */}
           <div className="text-[30px] font-bold  text-center w-[900px]">({wordData.part_of_speech}) {hint}</div>
           <div className={`${rowContainer} items-center justify-center `}>
             <div className="inputBox w-[400px]">

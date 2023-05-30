@@ -11,7 +11,6 @@ function AnswerContainer(props) {
     setIsCorrect(props.correct)
   }, [props.userClicked]);
 
-  // const colorSelector = isClicked ? (isCorrect ? 'bg-green-500' : 'bg-white') : (isButtonClicked ? 'bg-green-500' : 'bg-red-500');
   const colorSelector = isUserClicked ? (isCorrect ? 'bg-green-500' : (isButtonClicked ? 'bg-red-500' : 'bg-white')) : 'bg-white';
 
   return (
