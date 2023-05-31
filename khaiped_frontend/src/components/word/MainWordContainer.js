@@ -45,6 +45,15 @@ function MainWordContainer(props) {
         props.onClose(false);
     };
 
+    const handleSoundClick = (event) => {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(wordData.word);
+            speechSynthesis.speak(utterance);
+        } else {
+            console.log('Text-to-speech is not supported in this browser.');
+        }
+    };
+
     return (
         <div className={`contentBox  ${wordData ? ' ' : 'flex items-center justify-center'}`}>
             {wordData ? (
@@ -65,7 +74,7 @@ function MainWordContainer(props) {
                 </button>
             }
             {
-                props.sound && <button className={`sound ${buttonStyle} bottom-[20px] left-[20px]`}>
+                props.sound && <button className={`sound ${buttonStyle} bottom-[20px] left-[20px]`} onClick={() => handleSoundClick()}>
                     <FontAwesomeIcon icon={faVolumeHigh} style={{ fontSize: "35px" }} />
                 </button>
             }

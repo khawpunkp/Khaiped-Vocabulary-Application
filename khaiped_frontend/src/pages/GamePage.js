@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import LetterBox from '../components/game/LetterBox'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import GameResult from '../components/game/GameResult'
+import ResultBox from '../components/game/ResultBox'
 
 function GamePage() {
   const rowContainer = "flex flex-row space-x-5"
@@ -53,8 +53,7 @@ function GamePage() {
 
   const handleInputChange = (event) => {
     const value = event.target.value.toUpperCase();
-    setInputValue(value);
-    setIsSubmit(false);
+    setInputValue(value);           
   };
 
   const handleSubmitButton = () => {
@@ -65,6 +64,10 @@ function GamePage() {
     }
     else
       console.log('wrong');
+    setTimeout(() => {
+      setInputValue('');
+      setIsSubmit(false); 
+    }, 2000);
   }
 
   useEffect(() => {
@@ -123,7 +126,7 @@ function GamePage() {
         </div>
       )}
       {isCorrect && <div className="fixed top-[70px] bottom-0 left-0 right-0 flex justify-center items-center">
-                <GameResult/>
+                <ResultBox result = 'Correct!'/>
       </div>}
     </div>
   )

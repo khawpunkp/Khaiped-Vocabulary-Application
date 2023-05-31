@@ -17,6 +17,8 @@ class RandomWordView(APIView):
         if request.user.is_authenticated:
             learned_words = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
             words = Word.objects.exclude(id__in=learned_words)
+            if not words.exists():
+                words = Word.objects.all()
         else:
             words = Word.objects.all()
             
