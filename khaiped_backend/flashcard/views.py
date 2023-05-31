@@ -10,7 +10,7 @@ class FlashcardAPIView(APIView):
         learned = request.GET.get('l')
         learned = learned.lower() == 'true'
 
-        if request.user.is_authenticated and learned:
+        if (request.user.is_authenticated and learned) or not request.user.is_authenticated:
             words = Word.objects.all()
         else:
             learned_words = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
