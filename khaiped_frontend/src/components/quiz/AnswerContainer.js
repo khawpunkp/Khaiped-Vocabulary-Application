@@ -13,8 +13,17 @@ function AnswerContainer(props) {
 
   const colorSelector = isUserClicked ? (isCorrect ? 'bg-green-500' : (isButtonClicked ? 'bg-red-500' : 'bg-white')) : 'bg-white';
 
+  const handleButtonHover = (event) => {
+    event.currentTarget.style.transform = "scale(1.05)";
+  };
+  const handleButtonLeave = (event) => {
+    event.currentTarget.style.transform = "scale(1)";
+  };
+
   return (
-    <div className={`${colorSelector} w-[550px] h-[100px] rounded-[35px] flex justify-center items-center font-bold text-[40px]`}>
+    <div className={`${colorSelector} w-[550px] h-[100px] rounded-[35px] flex justify-center items-center font-bold text-[40px]`}
+      onMouseEnter={handleButtonHover}
+      onMouseLeave={handleButtonLeave}>
       {props.choice}
     </div>
   )

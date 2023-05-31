@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import SubmitButton from '../components/login/SubmitButton';
 
 function GameHomePage() {
   const [isInclude, setIsInclude] = useState(false);
@@ -20,11 +21,11 @@ function GameHomePage() {
         Word Scramble
       </div>
       <div className="flex flex-row space-x-4">
-        <button className='submitButton' onClick={() => handleModeSelection('easy')}>
-          Easy
+        <button onClick={() => handleModeSelection('easy')}>
+          <SubmitButton text='Easy'/>          
         </button>
-        <button className='submitButton' onClick={() => handleModeSelection('hard')}>
-          Hard
+        <button onClick={() => handleModeSelection('hard')}>
+          <SubmitButton text='Hard'/>          
         </button>
       </div>
       {/* <div className="flex flex-row space-x-3 items-center">

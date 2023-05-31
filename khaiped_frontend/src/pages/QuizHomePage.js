@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import SubmitButton from '../components/login/SubmitButton';
 
 function QuizHomePage() {
   const [isInclude, setIsInclude] = useState(false);
@@ -20,11 +21,11 @@ function QuizHomePage() {
         Quiz
       </div>
       <div className="flex flex-row space-x-4">
-        <button className='submitButton' onClick={() => handleModeSelection('easy')}>
-          Easy
+        <button onClick={() => handleModeSelection('easy')}>
+          <SubmitButton text='Easy' />
         </button>
-        <button className='submitButton' onClick={() => handleModeSelection('hard')}>
-          Hard
+        <button onClick={() => handleModeSelection('hard')}>
+          <SubmitButton text='Hard' />
         </button>
       </div>
       <div className="flex flex-row space-x-3 items-center">
@@ -35,7 +36,7 @@ function QuizHomePage() {
           style={{ transform: 'scale(1.5)' }}
           className='mb-1' // Increase the size of the checkbox
         />
-        <p className="font-bold text-[20px]">All Words</p> 
+        <p className="font-bold text-[20px]">All Words</p>
       </div>
     </div>
   )

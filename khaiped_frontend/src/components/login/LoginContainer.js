@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import SubmitButton from './SubmitButton';
 
 function LogInContainer() {
     const [username, setUsername] = useState('');
@@ -21,7 +22,7 @@ function LogInContainer() {
                 setIsSubmit(true);
                 console.log(response);
                 setTimeout(() => {
-                    navigate('/'); 
+                    navigate('/');
                 }, 1000);
             })
             .catch((error) => {
@@ -34,7 +35,7 @@ function LogInContainer() {
     return (
         <div className="LoginContainer flex flex-col items-center space-y-12">
             <h1 className='font-black text-[80px]'>{'Log In'}</h1>
-            <form className="form flex flex-col items-center space-y-7">
+            <form className="form flex flex-col items-center space-y-7" onSubmit={submitLogin}>
                 <div className="flex flex-col space-y-10">
                     <div className='inputBox w-[400px]'>
                         <input type="username"
@@ -58,7 +59,9 @@ function LogInContainer() {
                 {<p className={`text-[20px] font-bold ${isSubmit ? (isCorrect ? 'text-green-500' : 'text-red-500') : 'opacity-0'}`}>
                     {isCorrect ? 'Login Successfull' : 'Incorrect Username or Password'}
                 </p>}
-                <button onClick={submitLogin} className='submitButton'>{'Log In'}</button>
+                <button type="submit">
+                    <SubmitButton text='Log In' />
+                </button>
                 <div className="flex flex-row items-center space-x-2">
                     <p className='font-bold '>Do not have account?</p>
                     <button onClick={() => navigate("/register")} className='font-bold text-primary'>{'Register'}</button>

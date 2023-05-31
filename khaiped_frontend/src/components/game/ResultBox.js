@@ -9,7 +9,7 @@ function ResultBox(props) {
     return (
         <div className={`contentBox flex items-center justify-center`}>
             <div className="flex flex-col">
-                <h1 className="px-[55px] text-[64px] font-bold">{props.result}</h1>
+                <h1 className="px-[55px] text-[64px] font-bold text-center">{props.result}</h1>
                 {props.subtext && <p className="px-[55px] text-[20px] font-bold text-center">{props.subtext}</p>}
             </div>
             <button className="h-[37px] w-[37px] absolute bottom-[20px] left-[20px] bg-cover bg-center"
