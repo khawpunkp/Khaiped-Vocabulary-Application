@@ -4,7 +4,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from .serializers import UserRegisterSerializer, UserLogInSerializer, UserSerializer
+from database.models import Word, WordLearned
 from django.contrib.auth import login, logout
+from django.shortcuts import get_object_or_404
 # from rest_framework.authtoken.models import Token
 
 # Create your views here.
@@ -50,4 +52,17 @@ class SessionDataView(APIView):
             session_data['username'] = request.session.get('username', None)
             # Add more session data as needed
         return Response(session_data)
+    
+class WordLearnedView(APIView):
+    def post(self, request):
+        word_ids = request.data.get('word_ids', [])
+        user = request.user  # Assuming you have user authentication in place
+        
+        for word_id in word_ids:
+            word = get_object_or_404(Word, id=word_id)  # Retrieve the Word instance
+            word_learned_exists = WordLearned.objects.filter(user_id=user, word_id=word).exists()
+            if not word_learned_exists:
+                WordLearned.objects.create(user_id=user, word_id=word)
+
+        return Response({'message': 'Word IDs stored successfully'})
     

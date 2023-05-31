@@ -6,7 +6,7 @@ from database.models import Word
 from word.serializers import WordSerializer
 
 # Create your views here.
-class GetGameView(APIView):
+class GameAPIView(APIView):
     def get(self, request):
         words = Word.objects.all()
         if words.exists():

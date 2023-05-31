@@ -3,12 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRefresh, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom'
 
-function GameResult() {
+function ResultBox(props) {
     const navigate = useNavigate();
 
     return (
-        <div className={`relative w-[580px] h-[580px] bg-wordContainer rounded-[40px] border-4 border-black flex items-center justify-center`}>
-            <h1 className="px-[55px] text-[64px] font-bold">Correct!</h1>
+        <div className={`contentBox flex items-center justify-center`}>
+            <div className="flex flex-col">
+                <h1 className="px-[55px] text-[64px] font-bold">{props.result}</h1>
+                {props.subtext && <p className="px-[55px] text-[20px] font-bold text-center">{props.subtext}</p>}
+            </div>
             <button className="h-[37px] w-[37px] absolute bottom-[20px] left-[20px] bg-cover bg-center"
                 onClick={() => window.location.reload()}>
                 <FontAwesomeIcon icon={faRefresh} style={{ fontSize: "35px" }} />
@@ -20,4 +23,4 @@ function GameResult() {
     )
 }
 
-export default GameResult
+export default ResultBox

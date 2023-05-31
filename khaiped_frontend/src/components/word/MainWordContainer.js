@@ -31,7 +31,7 @@ function MainWordContainer(props) {
     }
 
     useEffect(() => {
-        console.log('use effect');
+        // console.log('use effect');
         if (props.isRandom) {
             randomWord();
         }
@@ -45,8 +45,17 @@ function MainWordContainer(props) {
         props.onClose(false);
     };
 
+    const handleSoundClick = (event) => {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(wordData.word);
+            speechSynthesis.speak(utterance);
+        } else {
+            console.log('Text-to-speech is not supported in this browser.');
+        }
+    };
+
     return (
-        <div className={`relative w-[580px] h-[580px] bg-wordContainer rounded-[40px] border-4 border-black  ${wordData ? ' ' : 'flex items-center justify-center'}`}>
+        <div className={`contentBox  ${wordData ? ' ' : 'flex items-center justify-center'}`}>
             {wordData ? (
                 <div className="flex flex-col items-center">
                     <h1 className="h-[100px] px-[55px] text-[64px] font-bold absolute top-[25%]">{wordData.word}</h1>
@@ -65,7 +74,7 @@ function MainWordContainer(props) {
                 </button>
             }
             {
-                props.sound && <button className={`sound ${buttonStyle} bottom-[20px] left-[20px]`}>
+                props.sound && <button className={`sound ${buttonStyle} bottom-[20px] left-[20px]`} onClick={() => handleSoundClick()}>
                     <FontAwesomeIcon icon={faVolumeHigh} style={{ fontSize: "35px" }} />
                 </button>
             }
