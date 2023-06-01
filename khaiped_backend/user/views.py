@@ -4,9 +4,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from .serializers import UserRegisterSerializer, UserLogInSerializer, UserSerializer
-from database.models import Word, WordLearned
+from database.models import Word, WordLearned, User
 from django.contrib.auth import login, logout
 from django.shortcuts import get_object_or_404
+from django.db.models import F
+
 # from rest_framework.authtoken.models import Token
 
 # Create your views here.
@@ -72,3 +74,27 @@ class WordLearnedView(APIView):
 
         return Response({'message': 'Word IDs stored successfully'})
     
+def ordinalize(number):
+    suffixes = {1: 'st', 2: 'nd', 3: 'rd'}
+    if 10 <= number % 100 <= 20:
+        suffix = 'th'
+    else:
+        suffix = suffixes.get(number % 10, 'th')
+    return f"{number}{suffix}"
+
+class LeaderboardAPIView(APIView):
+    def get(self, request):
+        users = User.objects.order_by('-score')  # Retrieve users sorted by score in descending order
+        
+        # Annotate the queryset with the rank based on the score
+        users = users.annotate(rank=F('score'))
+
+        leaderboard = []
+        for index, user in enumerate(users, start=1):
+            leaderboard.append({
+                'rank': ordinalize(index),
+                'username': user.username,
+                'score': user.score
+            })
+
+        return Response(leaderboard)
