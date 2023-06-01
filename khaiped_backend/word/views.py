@@ -40,13 +40,10 @@ class WordDetailView(APIView):
         try:
             # word_data = []
             word = Word.objects.get(pk=pk)
-            # serializer = WordSerializer(word)
             word_serializer = WordSerializer(word)
             word_root_serializer = WordRootSerializer(word.root_id)  # Access the WordRoot object through the 'root_id' field
-            # word_data.append({'word': word_serializer.data, 'word_root': word_root_serializer.data})
 
             return Response({'word': word_serializer.data, 'word_root': word_root_serializer.data}, status=status.HTTP_200_OK)
-            # return Response({'word': serializer.data}, status=status.HTTP_200_OK)
         except Word.DoesNotExist:
             return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
         
@@ -62,3 +59,15 @@ class SearchWordView(APIView):
             return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
         serializer = WordSerializer(result, many = True)        
         return Response({'words': serializer.data}, status=status.HTTP_200_OK)
+    
+class WordLearnedView(APIView):
+    def get(self, request):
+        words = Word.objects.all()
+        learned_id = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
+        words = words.filter(id__in=learned_id)
+        user = request.user.username
+        if not words:
+            return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
+        serializer = WordSerializer(words, many = True)        
+        return Response({'words': serializer.data, 'username': user}, status=status.HTTP_200_OK)
+       

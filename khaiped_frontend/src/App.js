@@ -4,7 +4,7 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/navbar/Navbar';
 
-import { Home, Login, Register, Statistic, Dictionary, SearchResult, QuizHomePage, QuizPage, GameHomePage, GamePage, FlashcardHomePage, FlashcardPage } from './pages';
+import { Home, Login, Register, Statistic, Dictionary, SearchResult, QuizHomePage, QuizPage, GameHomePage, GamePage, FlashcardHomePage, FlashcardPage, WordLearnedPage } from './pages';
 
 import axios from 'axios'
 
@@ -32,6 +32,7 @@ function App() {
           <Route path="/game-page/:mode" element={<GamePage />} />
           <Route path="/flashcard" element={<FlashcardHomePage />} />
           <Route path="/flashcard-page/:?" element={<FlashcardPage />} />
+          <Route path="/wordLearned" element={<WordLearnedPage />} />
         </Routes>
       </BrowserRouter>
     </div>

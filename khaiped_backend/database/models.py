@@ -52,11 +52,9 @@ class Word(models.Model):
     word = models.CharField(max_length=64, unique=True, null=False)
     tran_th = models.TextField(null=False)
     tran_eng = models.TextField(null=False)
-    part_of_speech = models.CharField(
-        choices=PARTS_OF_SPEECH, max_length=20, default='noun')
+    part_of_speech = models.CharField(choices=PARTS_OF_SPEECH, max_length=20, default='noun')
     root_id = models.ForeignKey(WordRoot, on_delete=models.SET_NULL, null=True)
     synonyms = models.ManyToManyField('self', blank=True)
-    part_of_speech = models.CharField(choices=PARTS_OF_SPEECH, max_length=20)
 
     def __str__(self):
         return self.word
@@ -71,6 +69,11 @@ class User(AbstractBaseUser):
     quiz_taken = models.IntegerField(default=0, null=False)
     day_streak = models.IntegerField(default=0, null=False)
     last_login = models.DateTimeField(null=True, blank=True)
+    is_login = models.BooleanField(default=False)
+    daily_play = models.IntegerField(default=0, null=False)
+    is_played = models.BooleanField(default=False)
+    is_quized = models.BooleanField(default=False)    
+    score = models.IntegerField(default=0, null=False)
 
     USERNAME_FIELD = 'username'
 
@@ -102,7 +105,21 @@ class User(AbstractBaseUser):
         elif self.last_login.date() == previous_date:
             return self.day_streak + 1
         else:
-            return 1
+            return 1        
+    
+    def reset_quest_status(self):
+        current_date = timezone.now().date()
+        if self.last_login.date() != current_date:
+            self.is_login = False
+            self.daily_play = 0
+            self.is_played = False
+            self.is_quiz = False
+            self.save()
+    
+    def save(self, *args, **kwargs):
+        self.reset_quest_status()
+        self.update_last_login()
+        super().save(*args, **kwargs)
 
 
 class WordLearned(models.Model):

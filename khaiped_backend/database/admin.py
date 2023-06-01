@@ -12,7 +12,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Permissions', {'fields': ('is_admin',)}),
-        ('User Stats', {'fields': ('game_played', 'quiz_score', 'quiz_taken', 'day_streak', 'last_login')}),
+        ('User Stats', {'fields': ('game_played', 'quiz_score', 'quiz_taken', 'day_streak', 'last_login', 'is_login','daily_play', 'is_played', 'is_quized', 'score')}),
     )
     search_fields = ('username',)
     ordering = ('username',)
