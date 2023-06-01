@@ -92,7 +92,8 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
     
-    def update_last_login(self):        
+    def update_login(self):
+        self.reset_quest_status()
         self.day_streak = self.get_day_streak()
         self.last_login = timezone.now()
         self.save()
@@ -113,14 +114,14 @@ class User(AbstractBaseUser):
             self.is_login = False
             self.daily_play = 0
             self.is_played = False
-            self.is_quiz = False
-            self.save()
+            self.is_quiz = False    
     
-    def save(self, *args, **kwargs):
-        self.reset_quest_status()
-        self.update_last_login()
-        super().save(*args, **kwargs)
-
+    @property
+    def quiz_percent(self):
+        if self.quiz_taken == 0:
+            return 0
+        else:
+            return round(self.quiz_score / self.quiz_taken * 100)
 
 class WordLearned(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -4,20 +4,22 @@ from rest_framework.response import Response
 from database.models import Word, WordLearned
 import random
 
-class QuizAPIView(APIView):
+class QuizScoreAPIView(APIView):
     def post(self, request):
-        quiz_score  = request.data.get('score')
-        user = request.user 
+        quiz_score = request.data.get('score')
+        user = request.user
         if user:
             user.quiz_score += quiz_score
             user.quiz_taken += 10
-            if not user.is_quiz and user.score >= 5: # daily quest
+            if not user.is_quized and user.quiz_score >= 5:  # Check if the user qualifies for the quiz bonus
                 user.score += 300
-                user.is_quiz = True
-            user.score += (quiz_score * 50) + 100 # score
+                user.is_quized = True
+            user.score += (quiz_score * 50) + 100  # Calculate the score
             user.save()
             return Response(status=status.HTTP_200_OK)
 
+
+class QuizAPIView(APIView):
     def get(self, request):
         mode = request.GET.get('m')
         allWords = request.GET.get('a')

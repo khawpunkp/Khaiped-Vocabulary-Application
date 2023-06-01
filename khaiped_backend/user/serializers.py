@@ -19,7 +19,8 @@ class UserLogInSerializer(serializers.ModelSerializer):
         fields = ('username', 'password', 'is_login')
     def check_user(self, data):
         user = authenticate(username = data['username'], password = data['password'])
-        if user and user.is_active:            
+        if user and user.is_active:
+            user.update_login()
             return user
         raise serializers.ValidationError("Unable to log in.")
 
@@ -31,4 +32,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username','game_played', 'quiz_score', 'quiz_taken', 'day_streak', 'word_learned_count', 'is_login', 'is_played', 'is_quized', 'score')
+        fields = ('username','game_played', 'quiz_percent', 'day_streak', 'word_learned_count', 'is_login', 'is_played', 'is_quized', 'score')

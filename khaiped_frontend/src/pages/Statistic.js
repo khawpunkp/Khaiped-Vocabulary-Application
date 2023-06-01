@@ -36,9 +36,9 @@ function Statistic() {
           <div>
             <StatContainer title='Word Learned' value={userData.word_learned_count} classifier='Words' learned={true}/>
             <StatContainer title='Game Played' value={userData.game_played} classifier='Games' />
-            <StatContainer title='Quiz Score' value={((userData.quiz_score) / (userData.quiz_taken)) * 100} classifier='Percent' />
+            <StatContainer title='Quiz Score' value={userData.quiz_percent} classifier='Percent' />
             <StatContainer title='Day Streak' value={userData.day_streak} classifier='Days' />
-            <StatContainer title='Total Score' value={userData.day_streak} classifier='Points' />
+            <StatContainer title='Total Score' value={userData.score} classifier='Points' />
           </div>
         </div>
       ) : (

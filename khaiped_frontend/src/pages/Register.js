@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import RegisterContainer from '../components/login/RegisterContainer'
+import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 function Register() {
-    return (
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() => {    
+        axios
+          .get('http://127.0.0.1:8000/user/user', { withCredentials: true })
+          .then(response => {
+            setIsLogin(true);
+          })
+          .catch(error => {
+            setIsLogin(false);
+          });
+      }, []);
+
+      return (
         <div className="">
-            <div className="content flex justify-center">
-                <RegisterContainer/>            
-            </div>
+            {isLogin ? (<Navigate to='/' />) :
+                (
+                    <div className="content flex justify-center">
+                        <RegisterContainer/>
+                    </div>
+                )
+            }
         </div>
     );
 }

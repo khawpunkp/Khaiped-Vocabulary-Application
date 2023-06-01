@@ -35,15 +35,17 @@ class UserLogOutView(APIView):
     def post(self, request):
         logout(request)
         return Response(status=status.HTTP_200_OK)
-    
-def logout_view(request):
-    logout(request)
 
 class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
     def get(self, request):
         serializer = UserSerializer(request.user)
+        user = request.user
+        if not user.is_login:
+            user.score += 100
+            user.is_login = True
+            user.save()
         return Response({'user': serializer.data}, status=status.HTTP_200_OK)
     
 class SessionDataView(APIView):

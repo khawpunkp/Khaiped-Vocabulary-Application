@@ -22,17 +22,20 @@ class GameAPIView(APIView):
     
     def post(self, request):
         first_attempt  = request.data.get('firstAttempt')
-        user = request.user             
-        user.game_played += 1
-        user.daily_play += 1        
-        if not user.is_played and user.daily_play >= 3: # daily quest
-            user.score += 300
-            user.is_played = True        
-        if first_attempt: # bonus score
-            user.score += 50        
-        user.score += 50 # score
-        user.save()
-        return Response(status=status.HTTP_200_OK)
+        if first_attempt:
+            first_attempt = first_attempt.lower() == 'true'
+        user = request.user 
+        if user:
+            user.game_played += 1
+            user.daily_play += 1        
+            if not user.is_played and user.daily_play >= 3: # daily quest
+                user.score += 300
+                user.is_played = True        
+            if first_attempt: # bonus score
+                user.score += 50        
+            user.score += 50 # score
+            user.save()
+            return Response(status=status.HTTP_200_OK)
     
     def scramble_word(self, word):
         word_list = list(word.upper())

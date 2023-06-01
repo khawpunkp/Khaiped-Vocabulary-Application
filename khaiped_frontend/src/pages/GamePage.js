@@ -20,7 +20,7 @@ function GamePage() {
 
   const getWord = () => {
     axios
-      .get(`http://127.0.0.1:8000/game/getWord`)
+      .get(`http://127.0.0.1:8000/game/game`)
       .then(response => {
         const word = response.data.word;
         setWordData(word);
@@ -69,8 +69,10 @@ function GamePage() {
     else
       console.log('wrong');
     setTimeout(() => {
-      setInputValue('');
-      setIsSubmit(false);
+      if (isCorrect) {
+        setInputValue('');
+        setIsSubmit(false);
+      }
     }, 2000);
   }
 
