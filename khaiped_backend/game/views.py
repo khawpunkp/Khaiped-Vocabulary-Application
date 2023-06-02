@@ -22,8 +22,8 @@ class GameAPIView(APIView):
     
     def post(self, request):
         first_attempt  = request.data.get('firstAttempt')
-        if first_attempt:
-            first_attempt = first_attempt.lower() == 'true'
+        # if first_attempt:
+        #     first_attempt = first_attempt.lower() == 'true'
         user = request.user 
         if user:
             user.game_played += 1

@@ -16,7 +16,8 @@ function GamePage() {
   const [scrambledWordIndex, setScrambledWordIndex] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-
+  const [attempt, setAttempt] = useState(0);
+  // const [firstAtempt, setFirstAttempt] = useState(false);
 
   const getWord = () => {
     axios
@@ -40,6 +41,12 @@ function GamePage() {
       });
   }
 
+  const post = (firstAtempt) => {
+    axios.post(`http://127.0.0.1:8000/game/game`, {
+      firstAttempt: firstAtempt,
+    })
+  }
+
   function countLetterOccurrences(letter) {
     const input = inputValue.toUpperCase();
     const searchLetter = letter.toUpperCase();
@@ -53,8 +60,7 @@ function GamePage() {
   }
 
   const handleInputChange = (event) => {
-    const value = event.target.value.toUpperCase();
-
+    const value = event.target.value
     if (value.length <= correctAnswer.length) {
       setInputValue(value);
     }
@@ -62,22 +68,28 @@ function GamePage() {
 
   const handleSubmitButton = () => {
     setIsSubmit(true)
-    if (correctAnswer.toLowerCase() === inputValue.toLowerCase()) {
-      setIsCorrect(true)
-      console.log('correct');
+    const isInputCorrect = correctAnswer.toLowerCase() === inputValue.toLowerCase();
+    setIsCorrect(isInputCorrect);
+    if (isInputCorrect && attempt < 1) {
+      post(true);
     }
-    else
-      console.log('wrong');
-    setTimeout(() => {
-      if (isCorrect) {
+    else if (isInputCorrect) {
+      post(false);
+    }
+    else {
+      setAttempt(attempt + 1);
+      setTimeout(() => {
         setInputValue('');
         setIsSubmit(false);
-      }
-    }, 2000);
+      }, 1500);
+    }
+    console.log(attempt);
   }
 
   useEffect(() => {
     getWord();
+    setAttempt(0);
+    // setFirstAttempt(false);
   }, [])
 
   return (
@@ -87,7 +99,7 @@ function GamePage() {
           <div className={`${rowContainer} justify-center `}>
             {correctAnswer.split('').map((letter, i) => {
               const answerSplit = correctAnswer.split('')
-              const isLetterCorrect = answerSplit[i].toUpperCase() === inputValue[i]
+              const isLetterCorrect = (answerSplit[i].toUpperCase() === inputValue[i]?.toUpperCase())
               return (<LetterBox
                 key={`${letter}_${i}`}
                 letter={inputValue[i]?.toUpperCase()}

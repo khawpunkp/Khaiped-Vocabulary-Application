@@ -21,7 +21,7 @@ function QuizPage() {
 
   const getQuiz = () => {
     axios
-      .get(`http://127.0.0.1:8000/quiz/getQuiz/?m=${mode}&a=${allWords}`)
+      .get(`http://127.0.0.1:8000/quiz/get-quiz/?m=${mode}&a=${allWords}`)
       .then(response => {
         setQuestion(response.data.question)
         setAnswer(response.data.answer)
@@ -30,6 +30,12 @@ function QuizPage() {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  const post = () => {
+    axios.post(`http://127.0.0.1:8000/quiz/score`, {
+      score: score,
+    })
   }
 
   const endQuiz = () => {
@@ -43,9 +49,9 @@ function QuizPage() {
       setButtonClicked(false);
       setDisableButton(false);
     }
-    // else{
-    //   endQuiz();
-    // }
+    else{
+      post();
+    }
   }, [questionIndex])
 
   const handleAnswerSelection = (choiceIndex) => {

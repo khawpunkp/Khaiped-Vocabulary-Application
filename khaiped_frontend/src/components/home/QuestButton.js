@@ -41,7 +41,7 @@ function QuestButton() {
             }
         };
         getQuestStatus();        
-    }, [location])
+    }, [location, isShown])
 
     return (
         <div className="relative">
