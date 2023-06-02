@@ -5,4 +5,5 @@ urlpatterns = [
     path('random', views.RandomWordView.as_view(), name='random'),
     path('<int:pk>', views.WordDetailView.as_view(), name='word-detail'),
     path('search/', views.SearchWordView.as_view(), name='word-search'),
+    path('word-learned', views.WordLearnedView.as_view(), name='word-learned'),
 ]

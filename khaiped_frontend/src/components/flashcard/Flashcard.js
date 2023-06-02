@@ -12,19 +12,6 @@ function Flashcard(props) {
     const [isFront, setIsFront] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
 
-    // const randomWord = () => {
-    //     axios
-    //         .get(API_URL, { withCredentials: true })
-    //         .then(response => {
-    //             setWordData(response.data.word);
-    //             setIsLoading(false);
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             setIsLoading(false);
-    //         });
-    // };
-
     const getWordData = () => {
         axios
             .get(`http://127.0.0.1:8000/word/${props.id}`, { withCredentials: true })
@@ -40,25 +27,10 @@ function Flashcard(props) {
     }
 
     useEffect(() => {
-        // randomWord();
         getWordData();
+        setIsFront(true);
     }, [props.id]);
 
-    // if (isLoading) {
-    //     return (
-    //         <div className='content flex justify-center'>
-    //             <h1 className='font-black text-[80px] text-center'>Loading...</h1>
-    //         </div> // Show a loading state while fetching the word
-    //     )
-    // }
-
-    // if (!wordData) {
-    //     return (
-    //         <div className='content flex justify-center'>
-    //             <h1 className='font-black text-[80px] text-center'>No word available</h1>
-    //         </div> // Handle the case when wordData is empty
-    //     )
-    // }
 
     const flipCard = () => {
         setIsFront(!isFront);

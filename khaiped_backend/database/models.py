@@ -16,6 +16,7 @@ class UserManager(BaseUserManager):
         )
 
         user.set_password(password)
+        user.last_login = timezone.now()
         user.save(using=self._db)
         return user
 
@@ -52,11 +53,9 @@ class Word(models.Model):
     word = models.CharField(max_length=64, unique=True, null=False)
     tran_th = models.TextField(null=False)
     tran_eng = models.TextField(null=False)
-    part_of_speech = models.CharField(
-        choices=PARTS_OF_SPEECH, max_length=20, default='noun')
+    part_of_speech = models.CharField(choices=PARTS_OF_SPEECH, max_length=20, default='noun')
     root_id = models.ForeignKey(WordRoot, on_delete=models.SET_NULL, null=True)
     synonyms = models.ManyToManyField('self', blank=True)
-    part_of_speech = models.CharField(choices=PARTS_OF_SPEECH, max_length=20)
 
     def __str__(self):
         return self.word
@@ -71,6 +70,11 @@ class User(AbstractBaseUser):
     quiz_taken = models.IntegerField(default=0, null=False)
     day_streak = models.IntegerField(default=0, null=False)
     last_login = models.DateTimeField(null=True, blank=True)
+    is_login = models.BooleanField(default=False)
+    daily_play = models.IntegerField(default=0, null=False)
+    is_played = models.BooleanField(default=False)
+    is_quized = models.BooleanField(default=False)    
+    score = models.IntegerField(default=0, null=False)
 
     USERNAME_FIELD = 'username'
 
@@ -89,7 +93,8 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
     
-    def update_last_login(self):        
+    def update_login(self):
+        self.reset_quest_status()
         self.day_streak = self.get_day_streak()
         self.last_login = timezone.now()
         self.save()
@@ -102,8 +107,22 @@ class User(AbstractBaseUser):
         elif self.last_login.date() == previous_date:
             return self.day_streak + 1
         else:
-            return 1
-
+            return 1        
+    
+    def reset_quest_status(self):
+        current_date = timezone.now().date()
+        if self.last_login.date() != current_date:
+            self.is_login = False
+            self.daily_play = 0
+            self.is_played = False
+            self.is_quized = False    
+    
+    @property
+    def quiz_percent(self):
+        if self.quiz_taken == 0:
+            return 0
+        else:
+            return round(self.quiz_score / self.quiz_taken * 100)
 
 class WordLearned(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

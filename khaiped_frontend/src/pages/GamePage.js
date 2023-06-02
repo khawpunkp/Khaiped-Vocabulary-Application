@@ -3,6 +3,8 @@ import LetterBox from '../components/game/LetterBox'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import ResultBox from '../components/game/ResultBox'
+import SubmitButton from '../components/login/SubmitButton'
+import HelpButton from '../components/home/HelpButton'
 
 function GamePage() {
   const rowContainer = "flex flex-row space-x-5"
@@ -15,28 +17,13 @@ function GamePage() {
   const [scrambledWordIndex, setScrambledWordIndex] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  // const [firstAtempt, setFirstAttempt] = useState(false);
 
-
-  const getWord = () => {
-    axios
-      .get(`http://127.0.0.1:8000/game/getWord`)
-      .then(response => {
-        const word = response.data.word;
-        setWordData(word);
-        setCorrectAnswer(word.word);
-        setScrambledWord(word.scrambled_word.split(''))
-        setScrambledWordIndex(word.index.split('').map((element) => parseInt(element, 10)))
-        if (mode === 'easy') {
-          setHint(word.tran_th);
-        } else {
-          setHint(word.tran_eng);
-        }
-        console.log(word);
-
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  const post = (firstAtempt) => {
+    axios.post(`http://127.0.0.1:8000/game/game`, {
+      firstAttempt: firstAtempt,
+    })
   }
 
   function countLetterOccurrences(letter) {
@@ -52,36 +39,77 @@ function GamePage() {
   }
 
   const handleInputChange = (event) => {
-    const value = event.target.value.toUpperCase();
-    setInputValue(value);           
+    const value = event.target.value
+    if (value.length <= correctAnswer.length) {
+      setInputValue(value);
+    }
   };
 
   const handleSubmitButton = () => {
     setIsSubmit(true)
-    if (correctAnswer.toLowerCase() === inputValue.toLowerCase()) {
-      setIsCorrect(true)
-      console.log('correct');
+    const isInputCorrect = correctAnswer.toLowerCase() === inputValue.toLowerCase();
+    setIsCorrect(isInputCorrect);
+    if (isInputCorrect && attempt < 1) {
+      post(true);
     }
-    else
-      console.log('wrong');
-    setTimeout(() => {
-      setInputValue('');
-      setIsSubmit(false); 
-    }, 2000);
+    else if (isInputCorrect) {
+      post(false);
+    }
+    else {
+      setAttempt(attempt + 1);
+      setTimeout(() => {
+        setInputValue('');
+        setIsSubmit(false);
+      }, 1500);
+    }
+    console.log(attempt);
   }
 
   useEffect(() => {
+    const getWord = () => {
+      axios
+        .get(`http://127.0.0.1:8000/game/game`)
+        .then(response => {
+          const word = response.data.word;
+          setWordData(word);
+          setCorrectAnswer(word.word);
+          setScrambledWord(word.scrambled_word.split(''))
+          setScrambledWordIndex(word.index.split('').map((element) => parseInt(element, 10)))
+          if (mode === 'easy') {
+            setHint(word.tran_th);
+          } else {
+            setHint(word.tran_eng);
+          }
+          console.log(word);
+
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+
     getWord();
+    setAttempt(0);
+    // setFirstAttempt(false);
   }, [])
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmitButton();
+    }
+  };
 
   return (
     <div className=''>
+      <div className="fixed right-5 top-28 z-40">
+        <HelpButton game={true} />
+      </div>
       {wordData ? (
         <div className='content flex flex-col justify-center space-y-10'>
           <div className={`${rowContainer} justify-center `}>
             {correctAnswer.split('').map((letter, i) => {
               const answerSplit = correctAnswer.split('')
-              const isLetterCorrect = answerSplit[i].toUpperCase() === inputValue[i]
+              const isLetterCorrect = (answerSplit[i].toUpperCase() === inputValue[i]?.toUpperCase())
               return (<LetterBox
                 key={`${letter}_${i}`}
                 letter={inputValue[i]?.toUpperCase()}
@@ -113,10 +141,11 @@ function GamePage() {
                 className="w-full bg-transparent pt-2 pb-1 outline-none text-2xl placeholder-[#590070] placeholder-opacity-30"
                 value={inputValue}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
-            <button className="submitButton" onClick={() => handleSubmitButton()}>
-              Submit
+            <button onClick={() => handleSubmitButton()}>
+              <SubmitButton text='Submit' />
             </button>
           </div>
         </div>
@@ -126,7 +155,7 @@ function GamePage() {
         </div>
       )}
       {isCorrect && <div className="fixed top-[70px] bottom-0 left-0 right-0 flex justify-center items-center">
-                <ResultBox result = 'Correct!'/>
+        <ResultBox result='Correct!' />
       </div>}
     </div>
   )

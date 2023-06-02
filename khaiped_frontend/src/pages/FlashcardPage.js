@@ -4,7 +4,14 @@ import happy from "../assets/svg/flashcard/happy.svg"
 import mad from "../assets/svg/flashcard/mad.svg"
 import axios from 'axios'
 import ResultBox from '../components/game/ResultBox'
+import HelpButton from '../components/home/HelpButton'
 
+const handleButtonHover = (event) => {
+  event.currentTarget.style.transform = "scale(1.05)";
+};
+const handleButtonLeave = (event) => {
+  event.currentTarget.style.transform = "scale(1)";
+};
 
 function FlashcardPage() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -13,6 +20,8 @@ function FlashcardPage() {
   const [flashcardsID, setFlashcardsID] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDone, setIsDone] = useState(false);
+
+
 
   const getWordID = () => {
     axios
@@ -33,26 +42,26 @@ function FlashcardPage() {
       withCredentials: true,
       word_ids: wordsID
     })
-    .then(response => {
-      setIsDone(true);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      .then(response => {
+        setIsDone(true);
+      })
+      .catch(error => {
+        console.log(error);
+        setIsDone(true);
+      });
   }
 
   const handleMemorizeButton = (isMem) => {
     if (isMem && flashcardsID.length > 1) {
       setFlashcardsID(prevState => prevState.slice(1));
-    } 
-    else if (!isMem && flashcardsID.length > 1) 
-    {
+    }
+    else if (!isMem && flashcardsID.length > 1) {
       setFlashcardsID(prevState => {
         const [firstID, ...restIDs] = prevState;
         return [...restIDs, firstID];
       });
     }
-    else{
+    else {
       storeWordLearned();
     }
     console.log(flashcardsID);
@@ -78,12 +87,11 @@ function FlashcardPage() {
     )
   }
 
-  if (isDone) {
-    
-  }
-
   return (
     <div className='content flex flex-col justify-center space-y-5'>
+      <div className="fixed right-5 top-28 z-40">
+        <HelpButton flashcard={true} />
+      </div>
       {!isDone && <Flashcard id={flashcardsID[0]} />}
       {!isDone && <div className="flex flex-row space-x-64">
         <button className="h-[70px] w-[70px] bg-cover bg-center"
@@ -91,6 +99,8 @@ function FlashcardPage() {
             backgroundImage: `url(${mad})`
           }}
           onClick={() => handleMemorizeButton(false)}
+          onMouseEnter={handleButtonHover}
+          onMouseLeave={handleButtonLeave}
         >
         </button>
         <button className="h-[70px] w-[70px] bg-cover bg-center"
@@ -98,12 +108,14 @@ function FlashcardPage() {
             backgroundImage: `url(${happy})`
           }}
           onClick={() => handleMemorizeButton(true)}
+          onMouseEnter={handleButtonHover}
+          onMouseLeave={handleButtonLeave}
         >
         </button>
-      </div>}   
+      </div>}
       {isDone && <div className="fixed top-[70px] bottom-0 left-0 right-0 flex justify-center items-center">
-                <ResultBox result = 'Complete!' subtext = 'You memorize all words'/>
-      </div>} 
+        <ResultBox result='Complete!' subtext='You memorize all words' />
+      </div>}
     </div>
   )
 }
