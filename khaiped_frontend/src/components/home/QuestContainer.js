@@ -65,7 +65,7 @@ function GameQuestContainer(props) {
             }
             <div className="flex flex-row space-x-2">
                 <p className="text-3xl font-black">{"Play"}</p>
-                <button className="text-3xl text-primary font-black" onClick={() => navigate('/game')}>game</button>
+                <button className="text-3xl text-primary font-black" onClick={() => navigate('/game')}>Game</button>
                 <p className="text-3xl font-black">{"3 times"}</p>
             </div>
             <p className="text-3xl font-black">{`(${props.dailyPlay}/3)`}</p>
@@ -86,7 +86,7 @@ function QuizQuestContainer(props) {
             }
             <div className="flex flex-row space-x-2">
                 <p className="text-3xl font-black">{"Do a"}</p>
-                <button className="text-3xl text-primary font-black" onClick={() => navigate('/quiz')}>quiz</button>
+                <button className="text-3xl text-primary font-black" onClick={() => navigate('/quiz')}>Quiz</button>
                 <p className="text-3xl font-black">{"and get 5 score or more"}</p>
             </div>
             <p className="text-lg font-bold">+300 points</p>

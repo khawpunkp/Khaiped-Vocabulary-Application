@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import ResultBox from '../components/game/ResultBox'
 import SubmitButton from '../components/login/SubmitButton'
+import HelpButton from '../components/home/HelpButton'
 
 function GamePage() {
   const rowContainer = "flex flex-row space-x-5"
@@ -18,28 +19,6 @@ function GamePage() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [attempt, setAttempt] = useState(0);
   // const [firstAtempt, setFirstAttempt] = useState(false);
-
-  const getWord = () => {
-    axios
-      .get(`http://127.0.0.1:8000/game/game`)
-      .then(response => {
-        const word = response.data.word;
-        setWordData(word);
-        setCorrectAnswer(word.word);
-        setScrambledWord(word.scrambled_word.split(''))
-        setScrambledWordIndex(word.index.split('').map((element) => parseInt(element, 10)))
-        if (mode === 'easy') {
-          setHint(word.tran_th);
-        } else {
-          setHint(word.tran_eng);
-        }
-        console.log(word);
-
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
 
   const post = (firstAtempt) => {
     axios.post(`http://127.0.0.1:8000/game/game`, {
@@ -87,13 +66,44 @@ function GamePage() {
   }
 
   useEffect(() => {
+    const getWord = () => {
+      axios
+        .get(`http://127.0.0.1:8000/game/game`)
+        .then(response => {
+          const word = response.data.word;
+          setWordData(word);
+          setCorrectAnswer(word.word);
+          setScrambledWord(word.scrambled_word.split(''))
+          setScrambledWordIndex(word.index.split('').map((element) => parseInt(element, 10)))
+          if (mode === 'easy') {
+            setHint(word.tran_th);
+          } else {
+            setHint(word.tran_eng);
+          }
+          console.log(word);
+
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+
     getWord();
     setAttempt(0);
     // setFirstAttempt(false);
   }, [])
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmitButton();
+    }
+  };
+
   return (
     <div className=''>
+      <div className="fixed right-5 top-28 z-40">
+        <HelpButton game={true} />
+      </div>
       {wordData ? (
         <div className='content flex flex-col justify-center space-y-10'>
           <div className={`${rowContainer} justify-center `}>
@@ -131,6 +141,7 @@ function GamePage() {
                 className="w-full bg-transparent pt-2 pb-1 outline-none text-2xl placeholder-[#590070] placeholder-opacity-30"
                 value={inputValue}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
             <button onClick={() => handleSubmitButton()}>

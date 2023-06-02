@@ -34,7 +34,7 @@ function FlachcardHomePage() {
           className='mb-1' // Increase the size of the checkbox
         />
         <p className="font-bold text-[20px]">Learned Words</p>
-      </div>
+      </div>      
     </div>
   )
 }

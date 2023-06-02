@@ -27,8 +27,8 @@ function Flashcard(props) {
     }
 
     useEffect(() => {
-        // randomWord();
         getWordData();
+        setIsFront(true);
     }, [props.id]);
 
 

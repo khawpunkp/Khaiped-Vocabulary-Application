@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import AnswerContainer from '../components/quiz/AnswerContainer'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import ResultBox from '../components/game/ResultBox';
+import HelpButton from '../components/home/HelpButton';
 
 function QuizPage() {
   const { mode } = useParams();
   const urlParams = new URLSearchParams(window.location.search);
   const allWords = urlParams.get('allWords');
-  const navigate = useNavigate();
 
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -38,11 +38,6 @@ function QuizPage() {
     })
   }
 
-  const endQuiz = () => {
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
-  }
   useEffect(() => {
     if (questionIndex <= 10) {
       getQuiz();
@@ -74,6 +69,9 @@ function QuizPage() {
 
   return (
     <div className="content flex justify-center">
+      <div className="fixed right-5 top-28 z-40">
+        <HelpButton quiz={true} />
+      </div>
       {(questionIndex <= 10) ? (
         <div className='flex flex-col space-y-5'>
           <div className='thai text-[60px] w-[1190px] font-bold text-center'>{question}</div>

@@ -7,9 +7,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'password')
     def create(self, data):
-        user_obj = User.objects.create_user(username = data['username'], password = data['password'])
-        user_obj.save()
-        return user_obj
+        user = User.objects.create_user(username = data['username'], password = data['password'])        
+        user.save()
+        return user
 
 class UserLogInSerializer(serializers.ModelSerializer):
     username = serializers.CharField()

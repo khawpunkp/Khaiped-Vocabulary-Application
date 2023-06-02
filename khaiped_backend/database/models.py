@@ -16,6 +16,7 @@ class UserManager(BaseUserManager):
         )
 
         user.set_password(password)
+        user.last_login = timezone.now()
         user.save(using=self._db)
         return user
 

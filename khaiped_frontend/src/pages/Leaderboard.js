@@ -45,8 +45,8 @@ function Leaderboard() {
             <div className="font-black text-[80px] text-center">
                 Leaderboard
             </div>
-            <div className="space-y-5">
-                {leaderboard.map((result) => (
+            <div className="space-y-7">
+                {leaderboard.slice(0, 5).map((result) => (
                     <RankContainer key={result.id} rank={result.rank} username={result.username} score={result.score} />
                 ))}
             </div>
