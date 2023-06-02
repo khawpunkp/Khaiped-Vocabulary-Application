@@ -11,3 +11,4 @@ export { default as GamePage } from './GamePage.js';
 export { default as FlashcardHomePage } from './FlachcardHomePage.js';
 export { default as FlashcardPage } from './FlashcardPage.js';
 export { default as WordLearnedPage } from './WordLearnedPage.js';
+export { default as Leaderboard } from './Leaderboard.js';

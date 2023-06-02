@@ -90,11 +90,18 @@ class LeaderboardAPIView(APIView):
         users = users.annotate(rank=F('score'))
 
         leaderboard = []
+        current_user = None
         for index, user in enumerate(users, start=1):
+            if user == request.user:
+                current_user = {
+                    'rank': ordinalize(index),
+                    'username': user.username,
+                    'score': user.score
+                }
             leaderboard.append({
                 'rank': ordinalize(index),
                 'username': user.username,
                 'score': user.score
             })
 
-        return Response(leaderboard)
+        return Response({'leaderboard': leaderboard, 'current_user': current_user}, status=status.HTTP_200_OK)

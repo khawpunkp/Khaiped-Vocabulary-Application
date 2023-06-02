@@ -32,4 +32,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username','game_played', 'quiz_percent', 'day_streak', 'word_learned_count', 'is_login', 'is_played', 'is_quized', 'score')
+        fields = ('username','game_played', 'quiz_percent', 'day_streak', 'word_learned_count', 'is_login','daily_play', 'is_played', 'is_quized', 'score')

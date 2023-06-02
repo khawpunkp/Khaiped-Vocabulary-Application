@@ -9,7 +9,7 @@ function HomeButton(props) {
     };
     return (
         <button
-            className="w-[420px] h-[100px] bg-cover bg-center p-4 pl-36 flex items-center"
+            className="w-[420px] h-[100px] bg-cover bg-center p-4 pl-36 flex items-center" 
             style={{
                 backgroundImage: `url(${props.buttonImg})`
             }}

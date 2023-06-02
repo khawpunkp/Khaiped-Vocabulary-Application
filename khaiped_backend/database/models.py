@@ -114,7 +114,7 @@ class User(AbstractBaseUser):
             self.is_login = False
             self.daily_play = 0
             self.is_played = False
-            self.is_quiz = False    
+            self.is_quized = False    
     
     @property
     def quiz_percent(self):

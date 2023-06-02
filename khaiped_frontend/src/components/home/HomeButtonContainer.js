@@ -13,7 +13,7 @@ function HomeButtonContainer() {
     const navigate = useNavigate();
 
     return (
-        <div className="relative">
+        <div className="">
             <div className="flex flex-col my-8 space-y-6">
                 <div className="RandomButton" onClick={() => setRndWordPopUp(true)}>
                     <HomeButton buttonImg={randomButton} title="Random Word" description="New word you have never learn" />

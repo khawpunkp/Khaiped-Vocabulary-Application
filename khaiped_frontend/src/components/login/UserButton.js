@@ -8,30 +8,11 @@ axios.defaults.withCredentials = true;
 
 function UserButton(props) {
   const navigate = useNavigate();
-  const navToStatistic = () => {
+  
+  const nav = (route) => {
     props.onClose(false);
-    navigate('/statistic');
+    navigate(route);
   };
-
-  // const submitLogout = () => {
-  //   axios
-  //     .post('http://127.0.0.1:8000/user/logout')
-  //     .then(response => {
-  //       console.log(response);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // };
-
-  // const submitLogout(e) {
-  //   e.preventDefault();
-  //   axios.post(
-  //     "http://127.0.0.1:8000/user/logout",
-  //     { withCredentials: true }
-  //   )
-  //   props.onClose(false);
-  // }
 
   const submitLogout = () => {
     axios
@@ -54,8 +35,10 @@ function UserButton(props) {
   };
 
   return (
-    <div className='w-[130px] h-[100px] rounded-lg bg-white flex flex-col justify-center items-center space-y-2'>
-      <button onClick={() => navToStatistic()} className='font-bold text-[20px]'>Statistic</button>
+    <div className='w-[150px] h-[150px] rounded-lg bg-white flex flex-col justify-center items-center space-y-2'>
+      <button onClick={() => nav('/statistic')} className='font-bold text-[20px]'>Statistic</button>
+      <div className='border-y border-black w-[75%]'></div>
+      <button onClick={() => nav('/leaderboard')} className='font-bold text-[20px]'>Leaderboard</button>
       <div className='border-y border-black w-[75%]'></div>
       <form onSubmit={e => handleClickLogOut(e)}>
         <button className='font-bold text-[20px]'>Log Out</button>
