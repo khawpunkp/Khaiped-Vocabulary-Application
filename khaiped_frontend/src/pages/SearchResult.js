@@ -27,7 +27,7 @@ function SearchResult() {
   return (
     <div className=''>
       {searchResults ? (
-        <div className="content space-y-4 mt-4 flex flex-col">
+        <div className="content space-y-4 mt-5 flex flex-col">
           <div className="font-black text-[80px] text-center">
             {searchResults.length} 
             {searchResults.length > 1 ? ' words' : ' word'} found

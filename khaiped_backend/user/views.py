@@ -44,6 +44,8 @@ class UserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         user = request.user
+        if user:
+            user.reset_quest_status()
         if not user.is_login:
             user.score += 100
             user.is_login = True

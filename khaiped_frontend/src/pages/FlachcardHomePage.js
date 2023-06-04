@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SubmitButton from '../components/login/SubmitButton';
+import HelpButton from '../components/home/HelpButton';
 
 function FlachcardHomePage() {
   const [isInclude, setIsInclude] = useState(false);
@@ -34,7 +35,10 @@ function FlachcardHomePage() {
           className='mb-1' // Increase the size of the checkbox
         />
         <p className="font-bold text-[20px]">Learned Words</p>
-      </div>      
+      </div>
+      <div className="fixed right-5 top-28 z-40">
+        <HelpButton flashcard={true} />
+      </div>  
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SubmitButton from '../components/login/SubmitButton';
+import HelpButton from '../components/home/HelpButton';
 
 function QuizHomePage() {
   const [isInclude, setIsInclude] = useState(false);
@@ -37,6 +38,9 @@ function QuizHomePage() {
           className='mb-1' // Increase the size of the checkbox
         />
         <p className="font-bold text-[20px]">All Words</p>
+      </div>
+      <div className="fixed right-5 top-28 z-40">
+        <HelpButton quiz={true} />
       </div>
     </div>
   )

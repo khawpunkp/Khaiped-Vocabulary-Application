@@ -38,7 +38,7 @@ function WordLearnedPage() {
     return (
         <div className=''>
             {results ? (
-                <div className="content space-y-4 mt-4 flex flex-col">
+                <div className="content space-y-4 mt-5 flex flex-col">
                     <div className="font-black text-[80px] text-center">
                     {username}'s Learned Words
                     </div>

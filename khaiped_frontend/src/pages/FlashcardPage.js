@@ -20,8 +20,7 @@ function FlashcardPage() {
   const [flashcardsID, setFlashcardsID] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDone, setIsDone] = useState(false);
-
-
+  const [isClicked, setIsClicked] = useState(false);
 
   const getWordID = () => {
     axios
@@ -65,11 +64,16 @@ function FlashcardPage() {
       storeWordLearned();
     }
     console.log(flashcardsID);
+    setIsClicked(false);
   };
 
   useEffect(() => {
     getWordID();
   }, [])
+
+  const handleClick = () => {
+    setIsClicked(true); // Update the isClicked state
+  };
 
   if (isLoading) {
     return (
@@ -92,7 +96,7 @@ function FlashcardPage() {
       <div className="fixed right-5 top-28 z-40">
         <HelpButton flashcard={true} />
       </div>
-      {!isDone && <Flashcard id={flashcardsID[0]} />}
+      {!isDone && <Flashcard id={flashcardsID[0]} onClickCallback={handleClick}/>}
       {!isDone && <div className="flex flex-row space-x-64">
         <button className="h-[70px] w-[70px] bg-cover bg-center"
           style={{
@@ -101,6 +105,7 @@ function FlashcardPage() {
           onClick={() => handleMemorizeButton(false)}
           onMouseEnter={handleButtonHover}
           onMouseLeave={handleButtonLeave}
+          disabled={!isClicked}
         >
         </button>
         <button className="h-[70px] w-[70px] bg-cover bg-center"
@@ -110,6 +115,7 @@ function FlashcardPage() {
           onClick={() => handleMemorizeButton(true)}
           onMouseEnter={handleButtonHover}
           onMouseLeave={handleButtonLeave}
+          disabled={!isClicked}
         >
         </button>
       </div>}

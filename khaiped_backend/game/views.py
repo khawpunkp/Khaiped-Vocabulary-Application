@@ -2,13 +2,23 @@ import random
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from database.models import Word
+from database.models import Word, WordLearned
 from word.serializers import WordSerializer
 
 # Create your views here.
 class GameAPIView(APIView):
     def get(self, request):
-        words = Word.objects.all()
+        allWords = request.GET.get('a')
+        allWords = allWords.lower() == 'true'
+
+        allWordsAvailable = Word.objects.all()
+
+        if not allWords and request.user.is_authenticated:            
+            learned_id = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
+            words = allWordsAvailable.filter(id__in=learned_id)            
+        else:            
+            words = allWordsAvailable  
+
         if words.exists():
             random_word = random.choice(words)
             scrambled_word, index = self.scramble_word(random_word.word)

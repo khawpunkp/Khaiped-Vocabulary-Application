@@ -11,6 +11,7 @@ function Flashcard(props) {
     const [picSrc, setPicSrc] = useState(null);
     const [isFront, setIsFront] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
+    const [isClicked, setIsClicked] = useState(false);
 
     const getWordData = () => {
         axios
@@ -29,11 +30,15 @@ function Flashcard(props) {
     useEffect(() => {
         getWordData();
         setIsFront(true);
+        setIsClicked(false);
+        console.log(isClicked);
     }, [props.id]);
 
 
     const flipCard = () => {
         setIsFront(!isFront);
+        setIsClicked(true);
+        props.onClickCallback(isClicked);
     };
 
     return (

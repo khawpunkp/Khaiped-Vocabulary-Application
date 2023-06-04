@@ -18,6 +18,8 @@ function GamePage() {
   const [isSubmit, setIsSubmit] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const urlParams = new URLSearchParams(window.location.search);
+  const allWords = urlParams.get('allWords');
   // const [firstAtempt, setFirstAttempt] = useState(false);
 
   const post = (firstAtempt) => {
@@ -68,7 +70,7 @@ function GamePage() {
   useEffect(() => {
     const getWord = () => {
       axios
-        .get(`http://127.0.0.1:8000/game/game`)
+        .get(`http://127.0.0.1:8000/game/game/?a=${allWords}`)
         .then(response => {
           const word = response.data.word;
           setWordData(word);

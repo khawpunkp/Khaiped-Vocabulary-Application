@@ -32,17 +32,17 @@ function HelpButton(props) {
     return (
         <div className="relative">
             <button
-                className="rounded-full bg-[#D885FF] w-[100px] h-[100px] border-[3px] border-black flex items-center justify-center"
+                className="rounded-full bg-[#D885FF] w-[70px] h-[70px] border-[3px] border-black flex items-center justify-center"
                 onMouseEnter={handleButtonHover}
                 onMouseLeave={handleButtonLeave}
                 onClick={() => setIsShown(!isShown)}
                 ref={refQuestButton}
             >
-                <FontAwesomeIcon icon={faQuestion} style={{ fontSize: '55px' }} />
+                <FontAwesomeIcon icon={faQuestion} style={{ fontSize: '40px' }} />
             </button>
             {isShown &&
                 (
-                    <div className="absolute top-0 right-32">
+                    <div className="absolute top-0 right-24">
                         {props.home && <HomeHelpContainer/>}
                         {props.flashcard && <FlashcardHelpContainer/>}
                         {props.game && <GameHelpContainer/>}
