@@ -21,6 +21,9 @@ function LogInContainer() {
                 setIsCorrect(true);
                 setIsSubmit(true);
                 console.log(response);
+                const { access, refresh } = response.data;
+                localStorage.setItem('accessToken', access);
+                localStorage.setItem('refreshToken', refresh);
                 setTimeout(() => {
                     navigate('/');
                 }, 1000);

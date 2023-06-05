@@ -32,15 +32,23 @@ function QuestButton() {
 
     useEffect(() => {
         const getQuestStatus = async () => {
+            const accessToken = localStorage.getItem('accessToken');
+
+            if (accessToken) {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+            } else {
+                delete axios.defaults.headers.common['Authorization'];
+            }
+
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/user`, { withCredentials: true });
-                setIsCompleted(response.data.user.is_login && response.data.user.is_played && response.data.user.is_quized)                
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/`, { withCredentials: true });
+                setIsCompleted(response.data.user.is_login && response.data.user.is_played && response.data.user.is_quized)
             } catch (error) {
                 console.log(error);
                 setIsCompleted(false);
             }
         };
-        getQuestStatus();        
+        getQuestStatus();
     }, [location, isShown])
 
     return (
@@ -57,7 +65,7 @@ function QuestButton() {
             {!isCompleted && (<div className="rounded-full bg-red-600 w-[25px] h-[25px] absolute top-0 right-0"></div>)}
             {isShown && (
                 <div className="absolute top-0 left-32">
-                    <QuestContainer isShown={isShown}/> 
+                    <QuestContainer isShown={isShown} />
                 </div>
             )}
         </div>

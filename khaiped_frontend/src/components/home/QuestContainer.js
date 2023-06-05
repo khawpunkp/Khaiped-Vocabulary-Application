@@ -9,11 +9,19 @@ function QuestContainer(props) {
     const [isPlayed, setIsPlayed] = useState(false);
     const [isQuized, setIsQuized] = useState(false);
     const [dailyPlay, setDailyPlay] = useState(0);
-   
+
     useEffect(() => {
         const getQuestStatus = async () => {
+            const accessToken = localStorage.getItem('accessToken');
+
+            if (accessToken) {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+            } else {
+                delete axios.defaults.headers.common['Authorization'];
+            }
+
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/user`, { withCredentials: true });
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/`, { withCredentials: true });
                 setIsLogin(response.data.user.is_login);
                 setIsPlayed(response.data.user.is_played);
                 setIsQuized(response.data.user.is_quized);
@@ -23,7 +31,7 @@ function QuestContainer(props) {
             }
         };
         getQuestStatus();
-        
+
     }, [props.isShown])
 
     return (

@@ -14,7 +14,7 @@ function SearchResult() {
     const search = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/word/search/?q=${searchQuery}`          
+          `${process.env.REACT_APP_API_URL}/word/search/?q=${searchQuery}`
         );
         setSearchResults(response.data.words);
         setIsLoading(false);

@@ -16,9 +16,17 @@ function Navbar() {
   const refUserButton = useRef();
   const navigate = useNavigate();
 
-  useEffect(() => {    
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    
+    if (accessToken) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+    }
+  
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user/user`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}user/`, { withCredentials: true })
       .then(response => {
         setIsLogin(true);
         // console.log(response);
@@ -27,7 +35,7 @@ function Navbar() {
         setIsLogin(false);
         // console.log(error);
       });
-  }, [isShown]);
+  }, [isShown]);  
 
   useEffect(() => {
     let handleClickOutside = (event) => {

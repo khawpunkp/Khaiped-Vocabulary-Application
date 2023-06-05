@@ -3,8 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from database.models import Word, WordLearned
 import random
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class QuizScoreAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
     def post(self, request):
         quiz_score = request.data.get('score')
         user = request.user

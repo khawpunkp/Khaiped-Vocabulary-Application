@@ -5,6 +5,7 @@ from .serializers import WordSerializer, WordRootSerializer
 from database.models import Word, WordLearned
 import random
 from django.db.models import Q
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Create your views here.
 class RandomWordView(APIView):
@@ -59,6 +60,7 @@ class SearchWordView(APIView):
         return Response({'words': serializer.data}, status=status.HTTP_200_OK)
     
 class WordLearnedView(APIView):
+    authentication_classes = [JWTAuthentication]
     def get(self, request):
         words = Word.objects.all()
         learned_id = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
