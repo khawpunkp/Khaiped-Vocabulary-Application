@@ -1,0 +1,14 @@
+export { default as Home } from './Home.js';
+export { default as Login } from './Login.js';
+export { default as Register } from './Register.js';
+export { default as Statistic } from './Statistic.js';
+export { default as Dictionary } from './Dictionary.js';
+export { default as SearchResult } from './SearchResult.js';
+export { default as QuizHomePage } from './QuizHomePage.js';
+export { default as QuizPage } from './QuizPage.js';
+export { default as GameHomePage } from './GameHomePage.js';
+export { default as GamePage } from './GamePage.js';
+export { default as FlashcardHomePage } from './FlachcardHomePage.js';
+export { default as FlashcardPage } from './FlashcardPage.js';
+export { default as WordLearnedPage } from './WordLearnedPage.js';
+export { default as Leaderboard } from './Leaderboard.js';

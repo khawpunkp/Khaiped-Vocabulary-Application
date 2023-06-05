@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+
+body {
+    background-color: #F4E9FF;
+    font-family: 'Noto Sans Thai', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.thai{
+    font-family: 'Noto Sans Thai', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input {
+    font-family: 'Noto Sans Thai', sans-serif;
+    font-weight: 600;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+input::placeholder {
+    font-family: 'Noto Sans Thai', sans-serif;
+    font-weight: 700;
 }
 
-.App-link {
-  color: #61dafb;
+.content {
+    height: 100vh;
+    padding-top: 70px;
+    align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.inputBox {
+    background-color: white;
+    padding: 0.25rem 1rem;
+    height: 60px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.inputText {
+    @apply w-full bg-transparent pt-2 pb-1 outline-none text-lg placeholder-placeholderText placeholder-opacity-30
+}
+
+.submitButton {
+    background-color: white;
+    width: 200px;
+    height: 50px;
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.contentBox {
+     @apply relative w-[580px] h-[580px] bg-wordContainer rounded-[40px] border-4 border-black
 }
