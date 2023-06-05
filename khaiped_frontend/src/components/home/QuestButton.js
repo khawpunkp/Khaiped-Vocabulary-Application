@@ -33,7 +33,7 @@ function QuestButton() {
     useEffect(() => {
         const getQuestStatus = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/user/user', { withCredentials: true });
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/user`, { withCredentials: true });
                 setIsCompleted(response.data.user.is_login && response.data.user.is_played && response.data.user.is_quized)                
             } catch (error) {
                 console.log(error);

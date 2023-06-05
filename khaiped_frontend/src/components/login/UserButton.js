@@ -17,7 +17,7 @@ function UserButton(props) {
   const submitLogout = () => {
     axios
       .post(
-        "http://127.0.0.1:8000/user/logout",
+        `${process.env.REACT_APP_API_URL}/user/logout`,
       )
       .then(response => {
         console.log(response);

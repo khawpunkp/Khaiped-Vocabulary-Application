@@ -24,7 +24,7 @@ function FlashcardPage() {
 
   const getWordID = () => {
     axios
-      .get(`http://127.0.0.1:8000/flash/getWords/?l=${learned}`)
+      .get(`${process.env.REACT_APP_API_URL}/flash/getWords/?l=${learned}`)
       .then(response => {
         setWordsID(response.data.word_ids);
         setFlashcardsID(response.data.word_ids);
@@ -37,7 +37,7 @@ function FlashcardPage() {
   }
 
   const storeWordLearned = () => {
-    axios.post(`http://127.0.0.1:8000/user/store-word-learned`, {
+    axios.post(`${process.env.REACT_APP_API_URL}/user/store-word-learned`, {
       withCredentials: true,
       word_ids: wordsID
     })

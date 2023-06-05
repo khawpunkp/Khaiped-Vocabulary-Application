@@ -18,7 +18,7 @@ function Navbar() {
 
   useEffect(() => {    
     axios
-      .get('http://127.0.0.1:8000/user/user', { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/user/user`, { withCredentials: true })
       .then(response => {
         setIsLogin(true);
         // console.log(response);

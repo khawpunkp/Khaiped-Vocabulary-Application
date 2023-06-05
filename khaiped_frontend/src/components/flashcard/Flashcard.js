@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const API_URL = 'http://127.0.0.1:8000/word/random';
-
 function Flashcard(props) {
     const buttonStyle = 'h-[37px] w-[37px] absolute bg-cover bg-center';
     const [wordData, setWordData] = useState(null);
@@ -15,7 +13,7 @@ function Flashcard(props) {
 
     const getWordData = () => {
         axios
-            .get(`http://127.0.0.1:8000/word/${props.id}`, { withCredentials: true })
+            .get(`${process.env.REACT_APP_API_URL}/word/${props.id}`, { withCredentials: true })
             .then(response => {
                 setWordData(response.data.word);
                 setPicSrc(response.data.word_root.pic)
@@ -86,7 +84,7 @@ function BackCard({ wordData, picSrc }) {
     return (
         <div className="flex flex-col items-center space-y-9">
             {picSrc && (
-                <img src={`http://127.0.0.1:8000/${picSrc}`} alt="Word Root" className="h-[100px] w-[100px]" />
+                <img src={`${process.env.REACT_APP_API_URL}/${picSrc}`} alt="Word Root" className="h-[100px] w-[100px]" />
             )}
             <h2 className=" text-6xl font-bold px-[55px] text-center">
                 {wordData.tran_th}

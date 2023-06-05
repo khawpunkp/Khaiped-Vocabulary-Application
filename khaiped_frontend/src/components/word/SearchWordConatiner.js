@@ -11,7 +11,7 @@ function SearchWordContainer(props) {
     useEffect(() => {
         const getWord = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/word/${props.wordID}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/word/${props.wordID}`);
                 setWordData(response.data.word);
             } catch (error) {
                 console.error(error);
