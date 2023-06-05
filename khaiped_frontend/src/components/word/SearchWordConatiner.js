@@ -7,12 +7,14 @@ import MainWordContainer from "./MainWordContainer";
 function SearchWordContainer(props) {
     const [wordData, setWordData] = useState(null);
     const [wordPopUp, setWordPopUp] = useState(false)
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getWord = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/word/${props.wordID}`);
                 setWordData(response.data.word);
+                setIsLoading(false);
             } catch (error) {
                 console.error(error);
             }
@@ -20,6 +22,14 @@ function SearchWordContainer(props) {
 
         getWord();
     }, [props.wordID]);    
+
+    if (isLoading) {
+        return (
+          <div className='content flex justify-center'>
+            <h1 className='font-black text-[80px] text-center'>Loading...</h1>
+          </div> // Show a loading state while fetching the word
+        )
+      }
 
     return (
         <div className="border-y-2 border-black w-fit">

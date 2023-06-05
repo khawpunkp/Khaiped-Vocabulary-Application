@@ -28,9 +28,11 @@ function MainWordContainer(props) {
             .get(`${process.env.REACT_APP_API_URL}/word/${props.wordID}`, { withCredentials: true })
             .then(response => {
                 setWordData(response.data.word);
+                setIsLoading(false);
             })
             .catch(error => {
                 console.log(error);
+                setIsLoading(false);
             });
     }
 
