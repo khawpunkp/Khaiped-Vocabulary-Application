@@ -21,7 +21,7 @@ function QuizPage() {
 
   const getQuiz = () => {
     axios
-      .get(`http://127.0.0.1:8000/quiz/get-quiz/?m=${mode}&a=${allWords}`)
+      .get(`${process.env.REACT_APP_API_URL}/quiz/get-quiz/?m=${mode}&a=${allWords}`)
       .then(response => {
         setQuestion(response.data.question)
         setAnswer(response.data.answer)
@@ -33,7 +33,7 @@ function QuizPage() {
   }
 
   const post = () => {
-    axios.post(`http://127.0.0.1:8000/quiz/score`, {
+    axios.post(`${process.env.REACT_APP_API_URL}/quiz/score`, {
       score: score,
     })
   }

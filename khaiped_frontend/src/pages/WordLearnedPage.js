@@ -12,7 +12,7 @@ function WordLearnedPage() {
     const getWords = async () => {
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/word/word-learned`
+                `${process.env.REACT_APP_API_URL}/word/word-learned`
             );
             setResults(response.data.words);
             setUsername(response.data.username);

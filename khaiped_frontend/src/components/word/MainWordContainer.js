@@ -10,7 +10,7 @@ function MainWordContainer(props) {
 
     const randomWord = () => {
         axios
-            .get('http://127.0.0.1:8000/word/random', { withCredentials: true })
+            .get(`${process.env.REACT_APP_API_URL}/word/random`, { withCredentials: true })
             .then(response => {
                 setWordData(response.data.word);
             })
@@ -21,7 +21,7 @@ function MainWordContainer(props) {
 
     const getWordData = () => {
         axios
-            .get(`http://127.0.0.1:8000/word/${props.wordID}`, { withCredentials: true })
+            .get(`${process.env.REACT_APP_API_URL}/word/${props.wordID}`, { withCredentials: true })
             .then(response => {
                 setWordData(response.data.word);
             })

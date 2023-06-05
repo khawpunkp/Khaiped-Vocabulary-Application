@@ -8,7 +8,7 @@ function Leaderboard() {
     const [isLoading, setIsLoading] = useState(true);
 
     const getLeaderboard = async () => {
-        axios.get('http://127.0.0.1:8000/user/leaderboard')
+        axios.get(`${process.env.REACT_APP_API_URL}/user/leaderboard`)
             .then((response) => {
                 setLeaderboard(response.data.leaderboard);
                 setCurrentUser(response.data.current_user);

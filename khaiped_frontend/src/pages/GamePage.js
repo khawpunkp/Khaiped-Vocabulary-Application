@@ -23,7 +23,7 @@ function GamePage() {
   // const [firstAtempt, setFirstAttempt] = useState(false);
 
   const post = (firstAtempt) => {
-    axios.post(`http://127.0.0.1:8000/game/game`, {
+    axios.post(`${process.env.REACT_APP_API_URL}/game/game`, {
       firstAttempt: firstAtempt,
     })
   }
@@ -70,7 +70,7 @@ function GamePage() {
   useEffect(() => {
     const getWord = () => {
       axios
-        .get(`http://127.0.0.1:8000/game/game/?a=${allWords}`)
+        .get(`${process.env.REACT_APP_API_URL}/game/game/?a=${allWords}`)
         .then(response => {
           const word = response.data.word;
           setWordData(word);
