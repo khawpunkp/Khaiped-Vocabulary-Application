@@ -7,6 +7,7 @@ import axios from 'axios';
 function SearchResult() {
   const { searchQuery } = useParams();
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     console.log(searchQuery);
@@ -23,6 +24,14 @@ function SearchResult() {
 
     search()
   }, [searchQuery])
+
+  if (isLoading) {
+    return (
+      <div className='content flex justify-center'>
+        <h1 className='font-black text-[80px] text-center'>Loading...</h1>
+      </div> // Show a loading state while fetching the word
+    )
+  }
 
   return (
     <div className=''>
