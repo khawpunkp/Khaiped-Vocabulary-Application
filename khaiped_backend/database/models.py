@@ -103,6 +103,8 @@ class User(AbstractBaseUser):
         current_date = timezone.now().date()
         previous_date = current_date - timedelta(days=1)
         if self.last_login.date() == current_date:
+            if self.day_streak == 0:
+                return 1
             return self.day_streak
         elif self.last_login.date() == previous_date:
             return self.day_streak + 1
