@@ -13,7 +13,7 @@ function RegisterContainer() {
     const submitRegister = (event) => {
         event.preventDefault();
         axios
-            .post('http://127.0.0.1:8000/user/register', {
+            .post(`${process.env.REACT_APP_API_URL}/user/register`, {
                 username: username,
                 password: password
             })
