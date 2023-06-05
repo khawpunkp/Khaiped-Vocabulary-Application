@@ -21,6 +21,8 @@ function UserButton(props) {
       )
       .then(response => {
         console.log(response);
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
       })
       .catch(error => {
         console.log(error);

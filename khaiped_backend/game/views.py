@@ -4,36 +4,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from database.models import Word, WordLearned
 from word.serializers import WordSerializer
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
-# Create your views here.
-class GameAPIView(APIView):
-    def get(self, request):
-        allWords = request.GET.get('a')
-        allWords = allWords.lower() == 'true'
-
-        allWordsAvailable = Word.objects.all()
-
-        if not allWords and request.user.is_authenticated:            
-            learned_id = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
-            words = allWordsAvailable.filter(id__in=learned_id)            
-        else:            
-            words = allWordsAvailable  
-
-        if words.exists():
-            random_word = random.choice(words)
-            scrambled_word, index = self.scramble_word(random_word.word)
-            serializer = WordSerializer(random_word)
-            data = serializer.data
-            data['scrambled_word'] = scrambled_word
-            data['index'] = index
-            return Response({'word': data}, status=status.HTTP_200_OK)
-        else:
-            return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)
-    
+class GameScoreAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
     def post(self, request):
         first_attempt  = request.data.get('firstAttempt')
-        # if first_attempt:
-        #     first_attempt = first_attempt.lower() == 'true'
         user = request.user 
         if user:
             user.game_played += 1
@@ -46,6 +22,33 @@ class GameAPIView(APIView):
             user.score += 50 # score
             user.save()
             return Response(status=status.HTTP_200_OK)
+
+# Create your views here.
+class GameAPIView(APIView):
+    def get(self, request):
+        allWords = request.GET.get('a')
+        allWords = allWords.lower() == 'true'
+
+        allWordsAvailable = Word.objects.all()
+
+        if not allWords and request.user.is_authenticated:            
+            learned_id = WordLearned.objects.filter(user_id=request.user).values_list('word_id', flat=True)
+            words = allWordsAvailable.filter(id__in=learned_id)
+            if not words:
+                words = allWordsAvailable  
+        else:            
+            words = allWordsAvailable  
+
+        if words.exists():
+            random_word = random.choice(words)
+            scrambled_word, index = self.scramble_word(random_word.word)
+            serializer = WordSerializer(random_word)
+            data = serializer.data
+            data['scrambled_word'] = scrambled_word
+            data['index'] = index
+            return Response({'word': data}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "No words available."}, status=status.HTTP_204_NO_CONTENT)   
     
     def scramble_word(self, word):
         word_list = list(word.upper())
