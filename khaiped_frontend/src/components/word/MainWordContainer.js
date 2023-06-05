@@ -37,7 +37,6 @@ function MainWordContainer(props) {
     }
 
     useEffect(() => {
-        // console.log('use effect');
         if (props.isRandom) {
             randomWord();
         }

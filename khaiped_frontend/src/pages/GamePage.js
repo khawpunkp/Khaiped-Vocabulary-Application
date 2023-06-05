@@ -82,7 +82,6 @@ function GamePage() {
           } else {
             setHint(word.tran_eng);
           }
-          console.log(word);
 
         })
         .catch(error => {

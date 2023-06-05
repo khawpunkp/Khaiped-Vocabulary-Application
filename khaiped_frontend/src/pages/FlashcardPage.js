@@ -63,7 +63,6 @@ function FlashcardPage() {
     else {
       storeWordLearned();
     }
-    console.log(flashcardsID);
     setIsClicked(false);
   };
 

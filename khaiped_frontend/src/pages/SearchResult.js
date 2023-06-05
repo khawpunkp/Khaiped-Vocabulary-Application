@@ -10,7 +10,6 @@ function SearchResult() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log(searchQuery);
     const search = async () => {
       try {
         const response = await axios.get(

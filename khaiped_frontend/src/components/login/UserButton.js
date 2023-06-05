@@ -20,12 +20,10 @@ function UserButton(props) {
         `${process.env.REACT_APP_API_URL}/user/logout`,
       )
       .then(response => {
-        console.log(response);
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
       })
       .catch(error => {
-        console.log(error);
       });
   }
 

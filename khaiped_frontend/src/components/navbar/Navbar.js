@@ -29,11 +29,11 @@ function Navbar() {
       .get(`${process.env.REACT_APP_API_URL}/user/`, { withCredentials: true })
       .then(response => {
         setIsLogin(true);
-        // console.log(response);
+        console.log(response);
       })
       .catch(error => {
         setIsLogin(false);
-        // console.log(error);
+        console.log(error);
       });
   }, [isShown]);  
 

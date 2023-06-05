@@ -29,7 +29,6 @@ function Flashcard(props) {
         getWordData();
         setIsFront(true);
         setIsClicked(false);
-        console.log(isClicked);
     }, [props.id]);
 
 
