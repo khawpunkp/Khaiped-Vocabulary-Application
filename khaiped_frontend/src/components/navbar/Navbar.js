@@ -26,7 +26,7 @@ function Navbar() {
     }
   
     axios
-      .get(`${process.env.REACT_APP_API_URL}user/`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/user/`, { withCredentials: true })
       .then(response => {
         setIsLogin(true);
         // console.log(response);
