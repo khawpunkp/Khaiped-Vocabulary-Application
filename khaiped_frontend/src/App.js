@@ -8,6 +8,7 @@ import { Home, Login, Register, Statistic, Dictionary, SearchResult, QuizHomePag
 
 import axios from 'axios'
 import QuestButton from './components/home/QuestButton';
+import TokenRefresh from './components/TokenRefresh';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -16,6 +17,7 @@ axios.defaults.withCredentials = true;
 function App() {
   return (
     <div className="">
+      <TokenRefresh />
       <BrowserRouter>
         <div className="fixed top-0 left-0 w-full z-50">
           <Navbar />
