@@ -13,7 +13,7 @@ const TokenRefresh = () => {
 
     const refreshToken = async () => {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/refresh-token`, { refreshToken: localStorage.getItem('refreshToken') });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/user/token-refresh`, { refresh: localStorage.getItem('refreshToken') });
 
             // Update the access token in storage or global state
             const newAccessToken = response.data.accessToken;
