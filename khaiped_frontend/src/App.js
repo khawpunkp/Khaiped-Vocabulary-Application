@@ -22,9 +22,9 @@ function App() {
         <div className="fixed top-0 left-0 w-full z-50">
           <Navbar />
         </div>
-        <div className="fixed left-5 top-28 z-40">
+        {/* <div className="fixed left-5 top-28 z-40">
           <QuestButton />
-        </div>
+        </div> */}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />

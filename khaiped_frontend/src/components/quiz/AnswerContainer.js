@@ -21,7 +21,7 @@ function AnswerContainer(props) {
   };
 
   return (
-    <div className={`${colorSelector} w-[550px] h-[100px] rounded-[35px] flex justify-center items-center font-bold text-[40px]`}
+    <div className={`${colorSelector} w-[500px] h-[100px] rounded-[35px] flex justify-center items-center font-bold text-[40px]`}
       onMouseEnter={handleButtonHover}
       onMouseLeave={handleButtonLeave}>
       {props.choice}

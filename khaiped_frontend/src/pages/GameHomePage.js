@@ -23,13 +23,13 @@ function GameHomePage() {
       </div>
       <div className="flex flex-row space-x-4">
         <button onClick={() => handleModeSelection('easy')}>
-          <SubmitButton text='Easy'/>          
+          <SubmitButton text='Start'/>          
         </button>
-        <button onClick={() => handleModeSelection('hard')}>
+        {/* <button onClick={() => handleModeSelection('hard')}>
           <SubmitButton text='Hard'/>          
-        </button>
+        </button> */}
       </div>
-      <div className="flex flex-row space-x-3 items-center">
+      {/* <div className="flex flex-row space-x-3 items-center">
         <input
           type="checkbox"
           checked={isInclude}
@@ -38,7 +38,7 @@ function GameHomePage() {
           className='mb-1' // Increase the size of the checkbox
         />
         <p className="font-bold text-[20px]">All Words</p>
-      </div>
+      </div> */}
       <div className="fixed right-5 top-28 z-40">
         <HelpButton game={true} />
       </div>
