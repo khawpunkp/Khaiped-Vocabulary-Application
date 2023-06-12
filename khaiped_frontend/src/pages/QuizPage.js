@@ -74,8 +74,8 @@ function QuizPage() {
       </div>
       {(questionIndex <= 10) ? (
         <div className='flex flex-col space-y-5'>
-          <div className='thai text-[60px] w-[1190px] font-bold text-center'>{question}</div>
-          <div className="grid grid-cols-2 gap-x-[90px] gap-y-[20px]">
+          <div className='thai text-[60px] w-[1100px] font-bold text-center'>{question}</div>
+          <div className="grid grid-cols-2 gap-x-[100px] gap-y-[20px] justify-center">
             <button onClick={() => handleAnswerSelection(0)} disabled={disableButton}>
               <AnswerContainer
                 choice={choices[0]}

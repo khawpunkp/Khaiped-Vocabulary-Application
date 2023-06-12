@@ -16,7 +16,7 @@ function HomeButtonContainer() {
         <div className="">
             <div className="flex flex-col my-8 space-y-6">
                 <div className="RandomButton" onClick={() => setRndWordPopUp(true)}>
-                    <HomeButton buttonImg={randomButton} title="Random Word" description="New word you have never learn" />
+                    <HomeButton buttonImg={randomButton} title="Random Word" description="New word you have never learned" />
                 </div>
                 <div className="CardButton" onClick={() => navigate("/flashcard")}>
                     <HomeButton buttonImg={cardButton} title="Flashcard" description="Memorise the word" />
