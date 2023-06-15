@@ -53,6 +53,7 @@ function MainWordContainer(props) {
     const handleSoundClick = (event) => {
         if ('speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(wordData.word);
+            utterance.lang = 'en-US'; 
             speechSynthesis.speak(utterance);
         } else {
             console.log('Text-to-speech is not supported in this browser.');
